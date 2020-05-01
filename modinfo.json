@@ -1,0 +1,51 @@
+{
+    "context": "client",
+    "identifier": "com.pa.trialq.tAutoFactory",
+    "display_name": "Auto Factory",
+    "description": "Automatically build units with idle factories, when eco would otherwise be wasted",
+    "author": "trialq",
+    "version": "1.8.4",
+    "build": "72332",
+    "date": "2014-09-24",
+    "signature": "not yet implemented",
+    "forum": "https://forums.uberent.com/threads/rel-auto-factory.55995/",
+    "icon": "http://pamods.github.io/icons/tAutoFactory.png",
+    "scenes": {
+        "settings": [
+            "coui://ui/mods/tAutoFactory/settings/init.js"
+        ],
+        "live_game": [
+            "coui://ui/mods/tAutoFactory/live_game/init.js"
+        ],
+        "live_game_options_bar": [
+            "coui://ui/mods/tAutoFactory/live_game_options_bar/init.js"
+        ]
+    },
+    "priority": 100,
+    "enabled": true,
+    "url": "https://github.com/trialq/tAutoFactory/archive/f4b629d5d5e9df701608178ebc6e01afcdfb2578.zip",
+    "download": "https://cdn.palobby.com/community-mods/downloads/com.pa.trialq.tAutoFactory.zip",
+    "unitList": false,
+    "fileSystem": false,
+    "searchable": [
+        "auto",
+        "factory",
+        "in-game",
+        "ui",
+        "trialq"
+    ],
+    "sort": "auto factory",
+    "authors": [
+        "trialq"
+    ],
+    "timestamp": 1411516800000,
+    "dependencies": [],
+    "companions": [],
+    "framework": false,
+    "available": true,
+    "titansOnly": false,
+    "classicOnly": false,
+    "classic": false,
+    "titans": false,
+    "conflicts": {}
+}
