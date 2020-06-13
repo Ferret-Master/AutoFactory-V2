@@ -337,7 +337,7 @@ var tAutoFactory = (function () {
 
     //update every 3 seconds
 	//change this if you want slightly more reliability, be careful though
-    setInterval(tAutoFactory.update, 3000);
+    setInterval(tAutoFactory.update, 1000);
 
     //visible to knockout
     model.tAutoFactory = tAutoFactory;
