@@ -1,4 +1,4 @@
-//customisation is described in a block of comments further down, you can adjsut the update interval at the bottom(default 3 seconds) for reliability at the cost of performance/potential issues
+//customisation is described in a block of comments further down, you can adjsut the update interval at the bottom(default 1 seconds) for reliability at the cost of performance/potential issues
 
 var tAutoFactory = (function () {
     "use strict";
@@ -335,7 +335,7 @@ var tAutoFactory = (function () {
             tAutoFactory.active = true;
     };
 
-    //update every 3 seconds
+    //update every 1 seconds
 	//change this if you want slightly more reliability, be careful though
     setInterval(tAutoFactory.update, 1000);
 
