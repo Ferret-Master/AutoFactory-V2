@@ -1,12 +1,12 @@
  {
    "context": "client",
-   "identifier": "modified autofactory",
-   "display_name": "modified autofactory",
+   "identifier": "Autofactory V2",
+   "display_name": "Autofactory V2",
    "description": "modified autofactory(original by trialq)",
    "author": "Ferretmaster",
    "version": "1.0",
-   "build": "105067",
-   "date": "2017-11-13",
+   "build": "114353",
+   "date": "2020-6-13",
    "signature": "not yet implemented",
 
    "forum": "",
@@ -14,13 +14,13 @@
    "icon": "",
    "scenes": {
         "settings": [
-            "coui://ui/mods/tAutoFactory/settings/init.js"
+            "coui://ui/mods/Autofactory/settings/init.js"
         ],
         "live_game": [
-            "coui://ui/mods/tAutoFactory/live_game/init.js"
+            "coui://ui/mods/Autofactory/live_game/init.js"
         ],
         "live_game_options_bar": [
-            "coui://ui/mods/tAutoFactory/live_game_options_bar/init.js"
+            "coui://ui/mods/Autofactory/live_game_options_bar/init.js"
         ]
     },
    "category": ["balance"]

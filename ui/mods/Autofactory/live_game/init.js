@@ -1,25 +1,92 @@
-//many things have been implemented in a naive way, which works but may get more and more unmaintainable. Possible refactor TODO
+//customisation is described in a block of comments further down, you can adjsut the update interval at the bottom(default 3 seconds) for reliability at the cost of performance/potential issues
 
 var tAutoFactory = (function () {
     "use strict";
+	
+	//function to build using the queue list
+	function buildFromQueue(FACNAME){
+		
+		var i;
+		
+		for (i = 0; i < FACNAME.length; i=i+3) {
+			
+			var amount = FACNAME[i],
+			type = FACNAME[i+1],
+			priority = FACNAME[i+2];
+			console.log(i +" : "+"attempting to queue " + amount +" " + type +" with " +priority);
+			api.unit.build(type, amount, priority);
+			api.unit.build(type+".player", amount, priority);
+		}
+		
+		
+		
+		
+		
+	}
 
-    //console.log("af roll call live game init object");
-
-    //console.log("af var create anon func");
-
-    var t1_bot_choice_a,
-        t2_bot_choice_a,
-        t1_veh_choice_a,
-        t2_veh_choice_a,
-        t1_air_choice_a,
-        t2_air_choice_a,
-        t1_nav_choice_a,
-        t2_nav_choice_a,
-        t1_orb_choice_a,
-        t2_orb_choice_a,
-        t1_nuk_choice_a,
-        t1_ank_choice_a,
-        t1_bot_use = 1,
+	// declaring all units/jsons as their commonly known name
+    var	ANT = '/pa/units/land/tank_light_laser/tank_light_laser.json',
+		VEHICLE_FAB = '/pa/units/land/fabrication_vehicle/fabrication_vehicle.json',
+		SKITTER = '/pa/units/land/land_scout/land_scout.json',
+		SPINNER = '/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json',
+		INFERNO = '/pa/units/land/tank_armor/tank_armor.json',
+		GRENADIER = '/pa/units/land/bot_grenadier/bot_grenadier.json',
+		DOX = '/pa/units/land/assault_bot/assault_bot.json',
+		SLAMMER = '/pa/units/land/assault_bot_adv/assault_bot_adv.json',
+		GILE = '/pa/units/land/sniper_bot/sniper_bot.json',
+		BOT_FAB = '/pa/units/land/fabrication_bot/fabrication_bot.json',
+		STITCH = '/pa/units/land/fabrication_bot_combat/fabrication_bot_combat.json',
+		BLUEHAWK = '/pa/units/land/bot_tactical_missile/bot_tactical_missile.json',
+		COLONEL = '/pa/units/land/bot_support_commander/bot_support_commander.json',
+		LOCUST = '/pa/units/land/bot_nanoswarm/bot_nanoswarm.json',
+		BOOM = '/pa/units/land/bot_bomb/bot_bomb.json',
+		SPARK = '/pa/units/land/bot_tesla/bot_tesla.json',
+		HUMMINGBIRD = '/pa/units/air/fighter/fighter.json',
+		AIR_FAB = '/pa/units/air/fabrication_aircraft/fabrication_aircraft.json',
+		FIREFLY = '/pa/units/air/air_scout/air_scout.json',
+		BUMBLEBEE = '/pa/units/air/bomber/bomber.json',
+		NAVAL_FAB = '/pa/units/sea/fabrication_ship/fabrication_ship.json',
+		PIRANHA = '/pa/units/sea/sea_scout/sea_scout.json',
+		NARWHAL = '/pa/units/sea/frigate/frigate.json',
+		ORCA = '/pa/units/sea/destroyer/destroyer.json',
+		BARRACUDA = '/pa/units/sea/attack_sub/attack_sub.json',
+		ICARUS = '/pa/units/air/solar_drone/solar_drone.json',
+		SOLAR_ARRAY = '/pa/units/orbital/solar_array/solar_array.json',
+		PELICAN = '/pa/units/air/transport/transport.json',
+		KESTREL = '/pa/units/air/gunship/gunship.json',
+		HORSEFLY = '/pa/units/air/strafer/strafer.json',
+		ANGEL = '/pa/units/air/support_platform/support_platform.json',
+		WYRM = '/pa/units/air/bomber_heavy/bomber_heavy.json',
+		HORNET = '/pa/units/air/bomber_adv/bomber_adv.json',
+		PHOENIX = '/pa/units/air/fighter_adv/fighter_adv.json',
+		KAIJU = '/pa/units/sea/hover_ship/hover_ship.json',
+		KRAKEN = '/pa/units/sea/nuclear_sub/nuclear_sub.json',
+		STINGRAY = '/pa/units/sea/missile_ship/missile_ship.json',
+		LEVIATHAN = '/pa/units/sea/battleship/battleship.json',
+		TYPHOON = '/pa/units/sea/drone_carrier/carrier/carrier.json',
+		STRYKER = '/pa/units/land/attack_vehicle/attack_vehicle.json',
+		DRIFTER = '/pa/units/land/tank_hover/tank_hover.json',
+		LEVELER = '/pa/units/land/tank_laser_adv/tank_laser_adv.json',
+		STORM = '/pa/units/land/tank_flak/tank_flak.json',
+		SHELLER = '/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json',
+		VANGUARD = '/pa/units/land/tank_heavy_armor/tank_heavy_armor.json',
+		MANHATTAN = '/pa/units/land/tank_nuke/tank_nuke.json',
+		ASTRAEUS = '/pa/units/orbital/orbital_lander/orbital_lander.json',
+		HERMES = '/pa/units/orbital/orbital_probe/orbital_probe.json',
+		AVENGER = '/pa/units/orbital/orbital_fighter/orbital_fighter.json',
+		ARTEMIS = '/pa/units/orbital/orbital_railgun/orbital_railgun.json',
+		SSX = '/pa/units/orbital/orbital_laser/orbital_laser.json',
+		OMEGA = '/pa/units/orbital/orbital_battleship/orbital_battleship.json',
+		ORBITAL_FAB = '/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json',
+		ADVANCED_BOT_FAB = '/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json',
+		ADVANCED_VEHICLE_FAB = '/pa/units/land/fabrication_vehicle_adv/fabrication_vehicle_adv.json',
+		ADVANCED_AIR_FAB = '/pa/units/air/fabrication_aircraft_adv/fabrication_aircraft_adv.json',
+		ADVANCED_NAVAL_FAB = '/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json',
+		BARNACLE= '/pa/units/sea/fabrication_barge/fabrication_barge.json',
+		MEND= '/pa/units/land/fabrication_bot_combat_adv/fabrication_bot_combat_adv.json',
+		
+		// values that determine if a factory is auto queued , if you don't want a factory being auto queued set to 0
+		t1_bot_use = 1,
         t2_bot_use = 1,
         t1_veh_use = 1,
         t2_veh_use = 1,
@@ -29,45 +96,107 @@ var tAutoFactory = (function () {
         t2_nav_use = 1,
         t1_orb_use = 1,
         t2_orb_use = 1,
-        t1_nuk_use = 1,
-        t1_ank_use = 1,
-		ant = '/pa/units/land/tank_light_laser/tank_light_laser.json',
-		v_fab = '/pa/units/land/fabrication_vehicle/fabrication_vehicle.json',
-		v_scout = '/pa/units/land/land_scout/land_scout.json',
-		spinner = '/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json',
-		inferno = '/pa/units/land/tank_armor/tank_armor.json',
-		grenadier = '/pa/units/land/bot_grenadier/bot_grenadier.json',
-		dox = '/pa/units/land/assault_bot/assault_bot.json',
-		b_fab = '/pa/units/land/fabrication_bot/fabrication_bot.json',
-		c_fab = '/pa/units/land/fabrication_bot_combat/fabrication_bot_combat.json',
-		boom = '/pa/units/land/bot_bomb/bot_bomb.json',
-		spark = '/pa/units/land/bot_tesla/bot_tesla.json',
-		hummingbird = '/pa/units/air/fighter/fighter.json',
-		a_fab = '/pa/units/air/fabrication_aircraft/fabrication_aircraft.json',
-		firefly = '/pa/units/air/air_scout/air_scout.json',
-		bumblebee = '/pa/units/air/bomber/bomber.json',
-		s_fab = '/pa/units/sea/fabrication_ship/fabrication_ship.json',
-		s_scout = '/pa/units/sea/sea_scout/sea_scout.json',
-		narwhal = '/pa/units/sea/frigate/frigate.json',
-		orca = '/pa/units/sea/destroyer/destroyer.json',
-		barracuda = '/pa/units/sea/attack_sub/attack_sub.json',
+        
+		//declaring default and custom queue for each factory
+		
+		BOT_FAC = [5,DOX,false,2,SPARK,false],
+		ADVANCED_BOT_FAC = [3, SLAMMER, false, 1, BLUEHAWK, false, 1, GILE, false],
+		VEHICLE_FAC = [3, ANT, false, 2, INFERNO, false, 1, SPINNER, false, 1, SKITTER, false, 2, ANT, false],
+		ADVANCED_VEHICLE_FAC = [3, LEVELER, false, 2, SHELLER, false, 3, LEVELER, false, 2, SHELLER, false, 1, STORM, false],
+		AIR_FAC = [1, FIREFLY, true, 2, HUMMINGBIRD, false, 1, BUMBLEBEE, false, 2, HUMMINGBIRD, false],
+		ADVANCED_AIR_FAC = [2, PHOENIX, false, 2, KESTREL, false, 1, HORSEFLY, false],
+		NAVAL_FAC = [1, ORCA, false, 2, BARRACUDA, false, 1, NARWHAL, false],
+		ADVANCED_NAVAL_FAC =[1, TYPHOON, true, 2, KRAKEN, false, 1, LEVIATHAN, false ],
+		ORBITAL_LAUNCHER = [10, AVENGER, false, 2, ARTEMIS, false],
+		ORBITAL_FACTORY =[1, AVENGER, false],
+	
+	
+	/*
+	for those that wish to customise their own queue the format is
+	
+	The number of the unit you wish to make
+	
+	The common name of the unit which can be found above without quotes
+	
+	and whether you want that queue to be priority or not, it is false for normal, true for priority. both without quotes
+	
+	have a comma between each entry and ensure each entry is a trio of 3 values, It will probably stop running/crash if a custom queue has more or less values.
+	
+	Alter the queues that have custom in their name. e.g BOT_FAC_CUSTOM = [amount, unit name, priority setting, amount 2, unit name 2, priority setting]
+	
+	by default custom queues are the same as default so they don't break if you only do a few of them
+	
+	*/
+	    
+		
+		// bot factory custom setting
+		BOT_FAC_CUSTOM = [5,DOX,false,2,SPARK,false],
+		
+		// advanced bot factory custom setting
+		ADVANCED_BOT_FAC_CUSTOM = [3, SLAMMER, false, 1, BLUEHAWK, false, 1, GILE, false],
+		
+		// vehicle factory custom setting
+		VEHICLE_FAC_CUSTOM = [3, ANT, false, 2, INFERNO, false, 1, SPINNER, false, 1, SKITTER, false, 2, ANT, false],
+		
+		// advanced vehicle factory custom setting
+		ADVANCED_VEHICLE_FAC_CUSTOM = [3, LEVELER, false, 2, SHELLER, false, 3, LEVELER, false, 2, SHELLER, false, 1, STORM, false],
+		
+		// air factory custom setting
+		AIR_FAC_CUSTOM = [1, FIREFLY, true, 2, HUMMINGBIRD, false, 1, BUMBLEBEE, false, 2, HUMMINGBIRD, false],
+		
+		// advanced air factory custom setting
+		ADVANCED_AIR_FAC_CUSTOM = [2, PHOENIX, false, 2, KESTREL, false, 1, HORSEFLY, false],
+		
+		// naval factory custom setting
+		NAVAL_FAC_CUSTOM = [1, ORCA, false, 2, BARRACUDA, false, 1, NARWHAL, false],
+		
+		// advanced naval factory custom setting
+		ADVANCED_NAVAL_FAC_CUSTOM = [1, TYPHOON, true, 2, KRAKEN, false, 1, LEVIATHAN, false ],
+		
+		// orbital launcher custom setting
+		ORBITAL_LAUNCHER_CUSTOM = [10, AVENGER, false, 2, ARTEMIS, false],
+		
+		// orbital factory custom setting
+		ORBITAL_FACTORY_CUSTOM = [1, AVENGER, false],
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
         tAutoFactory = {};
-
         tAutoFactory.active = true;
 
-    t1_bot_choice_a = api.settings.isSet('ui', 'tAutoFactory_dd_t1_bot', true)==undefined?'DOX':api.settings.isSet('ui', 'tAutoFactory_dd_t1_bot', true);
-    t2_bot_choice_a = api.settings.isSet('ui', 'tAutoFactory_dd_t2_bot', true)==undefined?'SLAMMER':api.settings.isSet('ui', 'tAutoFactory_dd_t2_bot', true);
-    t1_veh_choice_a = api.settings.isSet('ui', 'tAutoFactory_dd_t1_veh', true)==undefined?'T1 TANK':api.settings.isSet('ui', 'tAutoFactory_dd_t1_veh', true);
-    t2_veh_choice_a = api.settings.isSet('ui', 'tAutoFactory_dd_t2_veh', true)==undefined?'LEVELER':api.settings.isSet('ui', 'tAutoFactory_dd_t2_veh', true);
-    t1_air_choice_a = api.settings.isSet('ui', 'tAutoFactory_dd_t1_air', true)==undefined?'HUMMINGBIRD':api.settings.isSet('ui', 'tAutoFactory_dd_t1_air', true);
-    t2_air_choice_a = api.settings.isSet('ui', 'tAutoFactory_dd_t2_air', true)==undefined?'HORNET':api.settings.isSet('ui', 'tAutoFactory_dd_t2_air', true);
-    t1_nav_choice_a = api.settings.isSet('ui', 'tAutoFactory_dd_t1_nav', true)==undefined?'ORCA':api.settings.isSet('ui', 'tAutoFactory_dd_t1_nav', true);
-    t2_nav_choice_a = api.settings.isSet('ui', 'tAutoFactory_dd_t2_nav', true)==undefined?'LEVIATHAN':api.settings.isSet('ui', 'tAutoFactory_dd_t2_nav', true);
-    t1_orb_choice_a = api.settings.isSet('ui', 'tAutoFactory_dd_t1_orb', true)==undefined?'AVENGER':api.settings.isSet('ui', 'tAutoFactory_dd_t1_orb', true);
-    t2_orb_choice_a = api.settings.isSet('ui', 'tAutoFactory_dd_t2_orb', true)==undefined?'SAME AS LAUNCHER':api.settings.isSet('ui', 'tAutoFactory_dd_t2_orb', true);
-    t1_nuk_choice_a = api.settings.isSet('ui', 'tAutoFactory_dd_t1_nuk', true)==undefined?'NUKE':api.settings.isSet('ui', 'tAutoFactory_dd_t1_nuk', true);
-    t1_ank_choice_a = api.settings.isSet('ui', 'tAutoFactory_dd_t1_ank', true)==undefined?'ANTI-NUKE':api.settings.isSet('ui', 'tAutoFactory_dd_t1_ank', true);
+    var AutoFactory_Choice = api.settings.isSet('ui', 'AutoFactory_Choice', true)==undefined?'DEFAULT':api.settings.isSet('ui', 'AutoFactory_Choice', true);
+	if(AutoFactory_Choice === 'Custom'){
+		BOT_FAC = BOT_FAC_CUSTOM;
+		ADVANCED_BOT_FAC =ADVANCED_BOT_FAC_CUSTOM;
+		VEHICLE_FAC =VEHICLE_FAC_CUSTOM;
+		ADVANCED_VEHICLE_FAC =ADVANCED_VEHICLE_FAC_CUSTOM;
+		AIR_FAC =AIR_FAC_CUSTOM;
+		ADVANCED_AIR_FAC =ADVANCED_AIR_FAC_CUSTOM;
+		NAVAL_FAC =NAVAL_FAC_CUSTOM;
+		ADVANCED_NAVAL_FAC =ADVANCED_NAVAL_FAC_CUSTOM;
+		ORBITAL_LAUNCHER =ORBITAL_LAUNCHER_CUSTOM;
+		ORBITAL_FACTORY =ORBITAL_FACTORY_CUSTOM;
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+    
 
     function threshold_parse(id) {
       return ( (api.settings.isSet('ui', id, true) == undefined?80:api.settings.isSet('ui', id, true)) * 0.01 );
@@ -75,247 +204,8 @@ var tAutoFactory = (function () {
 
     
 
-    //parse settings
-    switch (t1_bot_choice_a) {
-    case 'GRENADIER':
-        t1_bot_choice_a = '/pa/units/land/bot_grenadier/bot_grenadier.json';
-        break;
-    case 'DOX':
-        t1_bot_choice_a = '/pa/units/land/assault_bot/assault_bot.json';
-        break;
-    case 'FABBER':
-        t1_bot_choice_a = '/pa/units/land/fabrication_bot/fabrication_bot.json';
-        break;
-    case 'COMBAT FABBER':
-        t1_bot_choice_a = '/pa/units/land/fabrication_bot_combat/fabrication_bot_combat.json';
-        break;
-    case 'BOOM':
-        t1_bot_choice_a = '/pa/units/land/bot_bomb/bot_bomb.json';
-        break;
-    case 'NONE':
-        t1_bot_use = 0;
-        break;
-    default:
-        //console.log("tAutoFactory: Unrecognised option (" + t1_bot_choice_a + ")");
-        break;
-    }
-
-    switch (t2_bot_choice_a) {
-    case 'SLAMMER':
-        t2_bot_choice_a = '/pa/units/land/assault_bot_adv/assault_bot_adv.json';
-        break;
-    case 'ADV FABBER':
-        t2_bot_choice_a = '/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json';
-        break;
-    case 'ADV COMBAT FABBER':
-        t2_bot_choice_a = '/pa/units/land/fabrication_bot_combat_adv/fabrication_bot_combat_adv.json';
-        break;
-    case 'GIL-E':
-        t2_bot_choice_a = '/pa/units/land/bot_sniper/bot_sniper.json';
-        break;
-    case 'BLUEHAWK':
-        t2_bot_choice_a = '/pa/units/land/bot_tactical_missile/bot_tactical_missile.json';
-        break;
-    case 'SAME AS T1':
-        t2_bot_use = 0;
-        break;
-    default:
-        //console.log("tAutoFactory: Unrecognised option (" + t2_bot_choice_a + ")");
-        break;
-    }
-
-    switch (t1_veh_choice_a) {
-    case 'T1 TANK':
-        t1_veh_choice_a = '/pa/units/land/tank_light_laser/tank_light_laser.json';
-        break;
-    case 'FABBER':
-        t1_veh_choice_a = '/pa/units/land/fabrication_vehicle/fabrication_vehicle.json';
-        break;
-    case 'SKITTER':
-        t1_veh_choice_a = '/pa/units/land/land_scout/land_scout.json';
-        break;
-    case 'SPINNER':
-        t1_veh_choice_a = '/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json';
-        break;
-    case 'INFERNO':
-        t1_veh_choice_a = '/pa/units/land/tank_armor/tank_armor.json';
-        break;
-    case 'NONE':
-        t1_veh_use = 0;
-        break;
-    default:
-        //console.log("tAutoFactory: Unrecognised option (" + t1_veh_choice_a + ")");
-        break;
-    }
-
-    switch (t2_veh_choice_a) {
-    case 'LEVELER':
-        t2_veh_choice_a = '/pa/units/land/tank_laser_adv/tank_laser_adv.json';
-        break;
-    case 'ADV FABBER':
-        t2_veh_choice_a = '/pa/units/land/fabrication_vehicle_adv/fabrication_vehicle_adv.json';
-        break;
-    case 'VANGUARD':
-        t2_veh_choice_a = '/pa/units/land/tank_heavy_armor/tank_heavy_armor.json';
-        break;
-    case 'SHELLER':
-        t2_veh_choice_a = '/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json';
-        break;
-    case 'SAME AS T1':
-        t2_veh_use = 0;
-        break;
-    default:
-        //console.log("tAutoFactory: Unrecognised option (" + t2_veh_choice_a + ")");
-        break;
-    }
-
-    switch (t1_air_choice_a) {
-    case 'HUMMINGBIRD':
-        t1_air_choice_a = '/pa/units/air/fighter/fighter.json';
-        break;
-    case 'FABBER':
-        t1_air_choice_a = '/pa/units/air/fabrication_aircraft/fabrication_aircraft.json';
-        break;
-    case 'FIREFLY':
-        t1_air_choice_a = '/pa/units/air/air_scout/air_scout.json';
-        break;
-    case 'BUMBLEBEE':
-        t1_air_choice_a = '/pa/units/air/bomber/bomber.json';
-        break;
-    case 'NONE':
-        t1_air_use = 0;
-        break;
-    default:
-        //console.log("tAutoFactory: Unrecognised option (" + t1_air_choice_a + ")");
-        break;
-    }
-
-    switch (t2_air_choice_a) {
-    case 'ADV FABBER':
-        t2_air_choice_a = '/pa/units/air/fabrication_aircraft_adv/fabrication_aircraft_adv.json';
-        break;
-    case 'PELICAN':
-        t2_air_choice_a = '/pa/units/air/transport/transport.json';
-        break;
-    case 'KESTREL':
-        t2_air_choice_a = '/pa/units/air/gunship/gunship.json';
-        break;
-    case 'HORNET':
-        t2_air_choice_a = '/pa/units/air/bomber_adv/bomber_adv.json';
-        break;
-    case 'SAME AS T1':
-        t2_air_use = 0;
-        break;
-    default:
-        //console.log("tAutoFactory: Unrecognised option (" + t2_air_choice_a + ")");
-        break;
-    }
-
-    switch (t1_nav_choice_a) {
-    case 'FABBER':
-        t1_nav_choice_a = '/pa/units/sea/fabrication_ship/fabrication_ship.json';
-        break;
-    case 'SUN FISH':
-        t1_nav_choice_a = '/pa/units/sea/sea_scout/sea_scout.json';
-        break;
-    case 'NARWHAL':
-        t1_nav_choice_a = '/pa/units/sea/frigate/frigate.json';
-        break;
-    case 'ORCA':
-        t1_nav_choice_a = '/pa/units/sea/destroyer/destroyer.json';
-        break;
-    case 'NONE':
-        t1_nav_use = 0;
-        break;
-    default:
-        //console.log("tAutoFactory: Unrecognised option (" + t1_nav_choice_a + ")");
-        break;
-    }
-
-    switch (t2_nav_choice_a) {
-    case 'ADV FABBER':
-        t2_nav_choice_a = '/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json';
-        break;
-    case 'LEVIATHAN':
-        t2_nav_choice_a = '/pa/units/sea/battleship/battleship.json';
-        break;
-    case 'STINGRAY':
-        t2_nav_choice_a = '/pa/units/sea/missile_ship/missile_ship.json';
-        break;
-    case 'SAME AS T1':
-        t2_nav_use = 0;
-        break;
-    default:
-        //console.log("tAutoFactory: Unrecognised option (" + t2_nav_choice_a + ")");
-        break;
-    }
-
-    switch (t1_orb_choice_a) {//launcher
-    case 'FABBER':
-        t1_orb_choice_a = '/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json';
-        break;
-    case 'ASTRAEUS':
-        t1_orb_choice_a = '/pa/units/orbital/orbital_lander/orbital_lander.json';
-        break;
-    case 'AVENGER':
-        t1_orb_choice_a = '/pa/units/orbital/orbital_fighter/orbital_fighter.json';
-        break;
-    case 'RADAR SATELLITE':
-        t1_orb_choice_a = '/pa/units/orbital/radar_satellite/radar_satellite.json';
-        break;
-    case 'NONE':
-        t1_orb_use = 0;
-        break;
-    default:
-        //console.log("tAutoFactory: Unrecognised option (" + t1_orb_choice_a + ")");
-        break;
-    }
-
-    switch (t2_orb_choice_a) {//factory
-    case 'ADV RADAR SATELLITE':
-        t2_orb_choice_a = '/pa/units/orbital/radar_satellite_adv/radar_satellite_adv.json';
-        break;
-    case 'SXX LASER':
-        t2_orb_choice_a = '/pa/units/orbital/orbital_laser/orbital_laser.json';
-        break;
-    case 'SOLAR ARRAY':
-        t2_orb_choice_a = '/pa/units/orbital/solar_array/solar_array.json';
-        break;
-    case 'SAME AS LAUNCHER'://special case, as launcher and factory can produce same units
-        t2_orb_use = 0;
-        break;
-    default:
-        //console.log("tAutoFactory: Unrecognised option (" + t2_orb_choice_a + ")");
-        break;
-    }
-
-    switch (t1_nuk_choice_a) {
-    case 'NUKE':
-        t1_nuk_choice_a = '/pa/units/land/nuke_launcher/nuke_launcher_ammo.json';
-        break;
-    case 'NONE':
-        t1_nuk_use = 0;
-        break;
-    default:
-        //console.log("tAutoFactory: Unrecognised option (" + t1_nuk_choice_a + ")");
-        break;
-    }
-
-    switch (t1_ank_choice_a) {
-    case 'ANTI-NUKE':
-        t1_ank_choice_a = '/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json';
-        break;
-    case 'NONE':
-        t1_ank_use = 0;
-        break;
-    default:
-        //console.log("tAutoFactory: Unrecognised option (" + t1_ank_choice_a + ")");
-        break;
-    }
-
-//console.log("af settings parse complete");
-
-    //update
+   
+//update
     tAutoFactory.update = function (exec_type) {
 //console.log("af update func");
 
@@ -326,72 +216,57 @@ var tAutoFactory = (function () {
         if ( ((exec_type === 'manual') || ((exec_type === 'auto') && !model.hasSelection()))  && model.maxEnergy() !== 0 ) {
             //if user hasn't selected anything && we're playing
 
-           var one = 1.0,
-               metal_perc = (model.currentMetal() * one) / model.maxMetal(),//between 0 and 1
-               energy_perc = (model.currentEnergy() * one) / model.maxEnergy(),//between 0 and 1
-               selected_enabled = 0;//if idle factories have been selected
+               var selected_enabled = 0;//if idle factories have been selected
 
             if (tAutoFactory.active) {
                 //if we possibly want to auto-build
-                if (t2_bot_use === 1) {//before t1
-                    if(selected_enabled === 0) {
+				//all t2 facs queued before t1 so we can deselect advanced factories to prevent t1 units queued in them
+                if (t2_bot_use === 1) {
+                    if(selected_enabled === 0) {//select idle factories if we haven't yet
                         
-                        api.select.idleFactoriesWithTypeFilter(0, 'Bot');
+                        api.select.allIdleFactories();
                         selected_enabled = 1;
                     }
-                    api.unit.build(t2_bot_choice_a, 30, false);
-                    api.unit.build(t2_bot_choice_a+".player", 30, false);
+					//console.log("queuing t2 bot fac");
+                    buildFromQueue(ADVANCED_BOT_FAC);
                 }
-                if (t2_veh_use === 1) {//before t1
+                if (t2_veh_use === 1) {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
                         selected_enabled = 1;
                     }
-                    api.unit.build(t2_veh_choice_a, 30, false);
-                    api.unit.build(t2_veh_choice_a+".player", 30, false);
+                     buildFromQueue(ADVANCED_VEHICLE_FAC);
+					 //console.log("queuing t2 veh fac");
                 }
-                if (t2_air_use === 1) {//before t1
+                if (t2_air_use === 1) {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
                         selected_enabled = 1;
                     }
-                    api.unit.build(t2_air_choice_a, 30, false);
-                    api.unit.build(t2_air_choice_a+".player", 30, false);
+                     buildFromQueue(ADVANCED_AIR_FAC);
                 }
-                if (t2_nav_use === 1) {//before t1
+                if (t2_nav_use === 1) {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
                         selected_enabled = 1;
                     }
-                    api.unit.build(t2_nav_choice_a, 10, false);
-                    api.unit.build(t2_nav_choice_a+".player", 10, false);
+                     buildFromQueue(ADVANCED_NAVAL_FAC);
                 }
-                if (t2_orb_use === 1) {//before t1
+                if (t2_orb_use === 1) {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
                         selected_enabled = 1;
                     }
-                    api.unit.build(t2_orb_choice_a, 1, false);
-                    api.unit.build(t2_orb_choice_a+".player", 1, false);
+                     buildFromQueue(ORBITAL_FACTORY);
                 }
                 if (t1_bot_use === 1) {
-                    if(selected_enabled === 0) {//select idle factories if we haven't yet
+                    if(selected_enabled === 0) {
                         api.select.allIdleFactories();
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
-                    api.unit.build(dox, 5, false);
-                    api.unit.build(dox+".player", 5, false);
-					api.unit.build(spark, 2, false);
-                    api.unit.build(spark+".player", 2, false);
-					api.unit.build(b_fab, 1, false);
-                    api.unit.build(b_fab+".player", 1, false);
-					api.unit.build(dox, 5, false);
-                    api.unit.build(dox+".player", 5, false);
-					api.unit.build(spark, 2, false);
-                    api.unit.build(spark+".player", 2, false);
-					api.unit.build(c_fab, 1, false);
-                    api.unit.build(c_fab+".player", 1, false);
+					//console.log("queuing t1 bot fac");
+                    buildFromQueue(BOT_FAC);
                 }
 
               
@@ -402,16 +277,7 @@ var tAutoFactory = (function () {
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
-                    api.unit.build(spinner, 1, true);
-                    api.unit.build(spinner+".player", 1, true);
-					api.unit.build(ant, 3, false);
-                    api.unit.build(ant+".player", 3, false);
-					api.unit.build(inferno, 2, false);
-                    api.unit.build(inferno+".player", 2, false);
-					api.unit.build(spinner, 1, false);
-                    api.unit.build(spinner+".player", 1, false);
-					api.unit.build(v_scout, 1, false);
-                    api.unit.build(v_scout+".player", 1, false);
+                     buildFromQueue(VEHICLE_FAC);
 					
                 }
 
@@ -422,14 +288,7 @@ var tAutoFactory = (function () {
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
-                    api.unit.build(firefly, 1, true);
-                    api.unit.build(firefly+".player", 1, true);
-					api.unit.build(hummingbird, 2, false);
-                    api.unit.build(hummingbird+".player", 2, false);
-					api.unit.build(bumblebee, 1, false);
-                    api.unit.build(bumblebee+".player", 1, false);
-					api.unit.build(hummingbird, 2, false);
-                    api.unit.build(hummingbird+".player", 2, false);
+                     buildFromQueue(AIR_FAC);
                 }
 
                
@@ -439,12 +298,7 @@ var tAutoFactory = (function () {
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
-                    api.unit.build(narwhal, 1, false);
-                    api.unit.build(narwhal+".player", 1, false);
-					api.unit.build(barracuda, 2, false);
-                    api.unit.build(barracuda+".player", 2, false);
-					api.unit.build(orca, 2, false);
-                    api.unit.build(orca+".player", 2, false);
+                     buildFromQueue(NAVAL_FAC);
                 }
 
                
@@ -454,26 +308,10 @@ var tAutoFactory = (function () {
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
-                    api.unit.build(t1_orb_choice_a, 1, false);
-                    api.unit.build(t1_orb_choice_a+".player", 1, false);
+                     buildFromQueue(ORBITAL_LAUNCHER);
                 }
 
-                if (t1_nuk_use === 1) {
-                    if(selected_enabled === 0) {
-                        api.select.allIdleFactories();
-                        selected_enabled = 1;
-                    }
-                    api.unit.build(t1_nuk_choice_a, 1, false);
-                    api.unit.build(t1_nuk_choice_a+".player", 1, false);
-                }
-                if (t1_ank_use === 1) {
-                    if(selected_enabled === 0) {
-                        api.select.allIdleFactories();
-                        selected_enabled = 1;
-                    }
-                    api.unit.build(t1_ank_choice_a, 1, false);
-                    api.unit.build(t1_ank_choice_a+".player", 1, false);
-                }
+              
                 if(selected_enabled === 1) {
                     api.select.empty();
                 }
@@ -482,15 +320,10 @@ var tAutoFactory = (function () {
         }
     };
 
-    //hotkey TODO
-    //action_sets.tAutoFactory["Manually Execute"] = function(event) { tAutoFactory.manual(); };
-    //action_sets.tAutoFactory["Toggle Auto-Build"] = function(event) { tAutoFactory.toggle(); };
-
     return tAutoFactory;
 })();
 
-//hotkey TODO
-//apply_keybinds("tAutoFactory");
+
 
 (function () {
     //handler to get ui toggle status
@@ -502,8 +335,9 @@ var tAutoFactory = (function () {
             tAutoFactory.active = true;
     };
 
-    //update every second
-    setInterval(tAutoFactory.update, 1000);
+    //update every 3 seconds
+	//change this if you want slightly more reliability, be careful though
+    setInterval(tAutoFactory.update, 3000);
 
     //visible to knockout
     model.tAutoFactory = tAutoFactory;
