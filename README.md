@@ -15,6 +15,10 @@ New Features:
  - Settings button to switch between custom and default queues in file, removed clutter of previous settings
 
  - Custom queues via file editing(commented well for accessibility) atm but will add in settings later
+ 
+ Fixed Bugs:
+ 
+ - Fixed t1 units getting queued in t2 factorys
 
 
 as with the other mod, highly recomended to use with the infinite build default mod
