@@ -13,7 +13,7 @@ var tAutoFactory = (function () {
 			var amount = FACNAME[i],
 			type = FACNAME[i+1],
 			priority = FACNAME[i+2];
-			console.log(i +" : "+"attempting to queue " + amount +" " + type +" with " +priority);
+			//console.log(i +" : "+"attempting to queue " + amount +" " + type +" with " +priority);
 			api.unit.build(type, amount, priority);
 			api.unit.build(type+".player", amount, priority);
 		}
