@@ -1,4 +1,10 @@
-//customisation is described in a block of comments further down, you can adjsut the update interval at the bottom(default 1 seconds) for reliability at the cost of performance/potential issues
+//customisation is moved to a settings menu, while easier to use it is less powerful for now
+
+
+
+
+
+
 
 var tAutoFactory = (function () {
     "use strict";
@@ -9,9 +15,8 @@ var tAutoFactory = (function () {
 		var i;
 		
 		for (i = 0; i < FACNAME.length; i=i+3) {
-			
-			var amount = FACNAME[i],
-			type = FACNAME[i+1],
+			var amount = parseInt(FACNAME[i],10),  //parses custom setting amounts
+			type = (FACNAME[i+1]),
 			priority = FACNAME[i+2];
 			//console.log(i +" : "+"attempting to queue " + amount +" " + type +" with " +priority);
 			api.unit.build(type, amount, priority);
@@ -85,7 +90,15 @@ var tAutoFactory = (function () {
 		BARNACLE= '/pa/units/sea/fabrication_barge/fabrication_barge.json',
 		MEND= '/pa/units/land/fabrication_bot_combat_adv/fabrication_bot_combat_adv.json',
 		
+		//unit var and string list needed to convert custom settings, not fun to type out 
+		
+		Unit_List = [ANT,VEHICLE_FAB,SKITTER,SPINNER,INFERNO,GRENADIER,DOX,SLAMMER,GILE,BOT_FAB,STITCH,BLUEHAWK,COLONEL,LOCUST,BOOM,SPARK,HUMMINGBIRD,AIR_FAB,FIREFLY,BUMBLEBEE,NAVAL_FAB,PIRANHA,NARWHAL,ORCA,BARRACUDA,ICARUS,SOLAR_ARRAY,PELICAN,KESTREL,HORSEFLY,ANGEL,WYRM,HORNET,PHOENIX,KAIJU,KRAKEN,STINGRAY,LEVIATHAN,TYPHOON,STRYKER,DRIFTER,LEVELER,STORM,SHELLER,VANGUARD,MANHATTAN,ASTRAEUS,HERMES,AVENGER,ARTEMIS,SSX,OMEGA,ORBITAL_FAB,ADVANCED_BOT_FAB,ADVANCED_VEHICLE_FAB,ADVANCED_AIR_FAB,ADVANCED_NAVAL_FAB,BARNACLE,MEND],
+		
+		
+		String_List = ["ANT","VEHICLE_FAB","SKITTER","SPINNER","INFERNO","GRENADIER","DOX","SLAMMER","GILE","BOT_FAB","STITCH","BLUEHAWK","COLONEL","LOCUST","BOOM","SPARK","HUMMINGBIRD","AIR_FAB","FIREFLY","BUMBLEBEE","NAVAL_FAB","PIRANHA","NARWHAL","ORCA","BARRACUDA","ICARUS","SOLAR_ARRAY","PELICAN","KESTREL","HORSEFLY","ANGEL","WYRM","HORNET","PHOENIX","KAIJU","KRAKEN","STINGRAY","LEVIATHAN","TYPHOON","STRYKER","DRIFTER","LEVELER","STORM","SHELLER","VANGUARD","MANHATTAN","ASTRAEUS","HERMES","AVENGER","ARTEMIS","SSX","OMEGA","ORBITAL_FAB","ADVANCED_BOT_FAB","ADVANCED_VEHICLE_FAB","ADVANCED_AIR_FAB","ADVANCED_NAVAL_FAB","BARNACLE","MEND"],
+		
 		// values that determine if a factory is auto queued , if you don't want a factory being auto queued set to 0
+		
 		t1_bot_use = 1,
         t2_bot_use = 1,
         t1_veh_use = 1,
@@ -97,7 +110,8 @@ var tAutoFactory = (function () {
         t1_orb_use = 1,
         t2_orb_use = 1,
         
-		//declaring default and custom queue for each factory
+		
+		//declaring default queue for each factory
 		
 		BOT_FAC = [5,DOX,false,2,SPARK,false],
 		ADVANCED_BOT_FAC = [3, SLAMMER, false, 1, BLUEHAWK, false, 1, GILE, false],
@@ -105,94 +119,87 @@ var tAutoFactory = (function () {
 		ADVANCED_VEHICLE_FAC = [3, LEVELER, false, 2, SHELLER, false, 3, LEVELER, false, 2, SHELLER, false, 1, STORM, false],
 		AIR_FAC = [1, FIREFLY, true, 2, HUMMINGBIRD, false, 1, BUMBLEBEE, false, 2, HUMMINGBIRD, false],
 		ADVANCED_AIR_FAC = [2, PHOENIX, false, 2, KESTREL, false, 1, HORSEFLY, false],
-		NAVAL_FAC = [1, ORCA, false, 2, BARRACUDA, false, 1, NARWHAL, false],
+		NAVAL_FAC = [2, BARRACUDA, false, 1, NARWHAL, false, 1, ORCA, false],
 		ADVANCED_NAVAL_FAC =[1, TYPHOON, true, 2, KRAKEN, false, 1, LEVIATHAN, false ],
 		ORBITAL_LAUNCHER = [10, AVENGER, false, 2, ARTEMIS, false],
 		ORBITAL_FACTORY =[1, AVENGER, false],
-	
-	
-	/*
-	for those that wish to customise their own queue the format is
-	
-	The number of the unit you wish to make
-	
-	The common name of the unit which can be found above without quotes
-	
-	and whether you want that queue to be priority or not, it is false for normal, true for priority. both without quotes
-	
-	have a comma between each entry and ensure each entry is a trio of 3 values, It will probably stop running/crash if a custom queue has more or less values.
-	
-	Alter the queues that have custom in their name. e.g BOT_FAC_CUSTOM = [amount, unit name, priority setting, amount 2, unit name 2, priority setting]
-	
-	by default custom queues are the same as default so they don't break if you only do a few of them
-	
-	*/
-	    
 		
-		// bot factory custom setting
-		BOT_FAC_CUSTOM = [5,DOX,false,2,SPARK,false],
+		Default_List = [BOT_FAC,ADVANCED_BOT_FAC,VEHICLE_FAC,ADVANCED_VEHICLE_FAC,AIR_FAC,ADVANCED_AIR_FAC,NAVAL_FAC,ADVANCED_NAVAL_FAC,ORBITAL_LAUNCHER,ORBITAL_FACTORY], //default list of factorys for use with settings
 		
-		// advanced bot factory custom setting
-		ADVANCED_BOT_FAC_CUSTOM = [3, SLAMMER, false, 1, BLUEHAWK, false, 1, GILE, false],
+		//parsing custom settings queues
+		SettingsList = [],
+		numberOfFactorys = 10,
+		FactoryList = ['Bot_Factory','Advanced_Bot_Factory','Vehicle_Factory','Advanced_Vehicle_Factory','Air_Factory','Advanced_Air_Factory','Naval_Factory','Advanced_Naval_Factory','Orbital_Launcher','Orbital_Factory'];
 		
-		// vehicle factory custom setting
-		VEHICLE_FAC_CUSTOM = [3, ANT, false, 2, INFERNO, false, 1, SPINNER, false, 1, SKITTER, false, 2, ANT, false],
+		//grabs each setting and splits the string
+		for (var i = 0;i < numberOfFactorys;i++) {
+			SettingsList[i] = api.settings.isSet('Autofactory', FactoryList[i], true)==undefined?Default_List[i]:api.settings.isSet('Autofactory', FactoryList[i], true).split(',');
+			
+			
+		}
 		
-		// advanced vehicle factory custom setting
-		ADVANCED_VEHICLE_FAC_CUSTOM = [3, LEVELER, false, 2, SHELLER, false, 3, LEVELER, false, 2, SHELLER, false, 1, STORM, false],
+		//parses the settings so they are useable
+		for (var a = 0; a<SettingsList.length;a++) {
+			
+			for (var b = 0;b<SettingsList[a].length;b++){
+				
+				
+				if (SettingsList[a][b] === "T"){
+					SettingsList[a][b] = true;
+					
+				}
+				if (SettingsList[a][b] === "F"){
+					
+					SettingsList[a][b] = false;
+					
+					}
+				
+				
+				for (i = 0; i<String_List.length;i++){
+					
+					
+					if (String_List[i] === SettingsList[a][b] ){
+						
+						SettingsList[a][b] = Unit_List[i];
+						
+						}
+					
+					
+				}
+				
+			} 
+		}
+		//declaring the custom settings 
 		
-		// air factory custom setting
-		AIR_FAC_CUSTOM = [1, FIREFLY, true, 2, HUMMINGBIRD, false, 1, BUMBLEBEE, false, 2, HUMMINGBIRD, false],
+		var BOT_FAC_CUSTOM,ADVANCED_BOT_FAC_CUSTOM,VEHICLE_FAC_CUSTOM,ADVANCED_VEHICLE_FAC_CUSTOM,AIR_FAC_CUSTOM,ADVANCED_AIR_FAC_CUSTOM,NAVAL_FAC_CUSTOM,ADVANCED_NAVAL_FAC_CUSTOM,ORBITAL_LAUNCHER_CUSTOM,ORBITAL_FACTORY_CUSTOM;
 		
-		// advanced air factory custom setting
-		ADVANCED_AIR_FAC_CUSTOM = [2, PHOENIX, false, 2, KESTREL, false, 1, HORSEFLY, false],
+		//list of custom settings
+		var Custom_List = [BOT_FAC_CUSTOM,ADVANCED_BOT_FAC_CUSTOM,VEHICLE_FAC_CUSTOM,ADVANCED_VEHICLE_FAC_CUSTOM,AIR_FAC_CUSTOM,ADVANCED_AIR_FAC_CUSTOM,NAVAL_FAC_CUSTOM,ADVANCED_NAVAL_FAC_CUSTOM,ORBITAL_LAUNCHER_CUSTOM,ORBITAL_FACTORY_CUSTOM];
 		
-		// naval factory custom setting
-		NAVAL_FAC_CUSTOM = [1, ORCA, false, 2, BARRACUDA, false, 1, NARWHAL, false],
 		
-		// advanced naval factory custom setting
-		ADVANCED_NAVAL_FAC_CUSTOM = [1, TYPHOON, true, 2, KRAKEN, false, 1, LEVIATHAN, false ],
+		for(i=0;i<numberOfFactorys;i++){
+			Custom_List[i] = SettingsList[i];
+			
+			
+		}
 		
-		// orbital launcher custom setting
-		ORBITAL_LAUNCHER_CUSTOM = [10, AVENGER, false, 2, ARTEMIS, false],
-		
-		// orbital factory custom setting
-		ORBITAL_FACTORY_CUSTOM = [1, AVENGER, false],
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
         tAutoFactory = {};
         tAutoFactory.active = true;
 
-    var AutoFactory_Choice = api.settings.isSet('ui', 'AutoFactory_Choice', true)==undefined?'DEFAULT':api.settings.isSet('ui', 'AutoFactory_Choice', true);
+    var AutoFactory_Choice = 'Custom';//no longer a need to differentiate due to defaults auto applying, mabye in future versions
 	if(AutoFactory_Choice === 'Custom'){
-		BOT_FAC = BOT_FAC_CUSTOM;
-		ADVANCED_BOT_FAC =ADVANCED_BOT_FAC_CUSTOM;
-		VEHICLE_FAC =VEHICLE_FAC_CUSTOM;
-		ADVANCED_VEHICLE_FAC =ADVANCED_VEHICLE_FAC_CUSTOM;
-		AIR_FAC =AIR_FAC_CUSTOM;
-		ADVANCED_AIR_FAC =ADVANCED_AIR_FAC_CUSTOM;
-		NAVAL_FAC =NAVAL_FAC_CUSTOM;
-		ADVANCED_NAVAL_FAC =ADVANCED_NAVAL_FAC_CUSTOM;
-		ORBITAL_LAUNCHER =ORBITAL_LAUNCHER_CUSTOM;
-		ORBITAL_FACTORY =ORBITAL_FACTORY_CUSTOM;
 		
-		
-		
-		
-		
-		
+		BOT_FAC = Custom_List[0];
+		ADVANCED_BOT_FAC =Custom_List[1];
+		VEHICLE_FAC =Custom_List[2];
+		ADVANCED_VEHICLE_FAC =Custom_List[3];
+		AIR_FAC =Custom_List[4];
+		ADVANCED_AIR_FAC =Custom_List[5];
+		NAVAL_FAC =Custom_List[6];
+		ADVANCED_NAVAL_FAC =Custom_List[7];
+		ORBITAL_LAUNCHER =Custom_List[8];
+		ORBITAL_FACTORY =Custom_List[9];
 		
 	}
 	
@@ -207,7 +214,7 @@ var tAutoFactory = (function () {
    
 //update
     tAutoFactory.update = function (exec_type) {
-//console.log("af update func");
+
 
         if (exec_type === undefined) {
             exec_type = 'auto';
@@ -227,7 +234,7 @@ var tAutoFactory = (function () {
                         api.select.allIdleFactories();
                         selected_enabled = 1;
                     }
-					//console.log("queuing t2 bot fac");
+					
                     buildFromQueue(ADVANCED_BOT_FAC);
                 }
                 if (t2_veh_use === 1) {
@@ -236,7 +243,7 @@ var tAutoFactory = (function () {
                         selected_enabled = 1;
                     }
                      buildFromQueue(ADVANCED_VEHICLE_FAC);
-					 //console.log("queuing t2 veh fac");
+					
                 }
                 if (t2_air_use === 1) {
                     if(selected_enabled === 0) {
@@ -265,7 +272,7 @@ var tAutoFactory = (function () {
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
-					//console.log("queuing t1 bot fac");
+					
                     buildFromQueue(BOT_FAC);
                 }
 
@@ -277,6 +284,7 @@ var tAutoFactory = (function () {
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
+					
                      buildFromQueue(VEHICLE_FAC);
 					
                 }
@@ -335,7 +343,7 @@ var tAutoFactory = (function () {
             tAutoFactory.active = true;
     };
 
-    //update every 1 seconds
+    //update every 3 seconds
 	//change this if you want slightly more reliability, be careful though
     setInterval(tAutoFactory.update, 1000);
 

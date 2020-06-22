@@ -1,8 +1,8 @@
  {
    "context": "client",
-   "identifier": "Autofactory V2",
-   "display_name": "Autofactory V2",
-   "description": "modified autofactory(original by trialq)",
+   "identifier": "dev autofac",
+   "display_name": "dev autofac",
+   "description": "dev autofac",
    "author": "Ferretmaster",
    "version": "1.0",
    "build": "114353",

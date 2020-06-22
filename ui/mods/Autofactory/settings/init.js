@@ -1,36 +1,67 @@
-(function() {
+//todo add a decription of how to use settings menu
+(function () {
+    model.settingGroups().push("Autofactory");
+    model.settingDefinitions().Autofactory = {title:"Autofactory",settings:{}};
 
-    //console.log("af roll call live game settings");
-
-    var af_settings_var = {
-
-	AutoFactory_Choice: {
-		title: 'Build Order Choice',
-		type: 'select',
-		set: 'AutoFactory',
-        display_group: 'AutoFactory',
-		options: ['DEFAULT', 'Custom'],
-		default: 'DEFUALT'
-	}
+    $(".option-list.keyboard").parent().append(
+        $.ajax({
+            type: "GET",
+            url: 'coui://ui/mods/Autofactory/settings/Autofactory.html',
+            async: false
+        }).responseText
+    );
+    
+   model.settingGroups.notifySubscribers();
 	
 
+
+	//the following section of code used wondibles connect buttons mod as reference so is fairly similar; credit to him for making working text input in settings menu as I could find no other reference	
 	
+  var numberOfFactorys = 10
+  var FactoryList = ['Bot_Factory','Advanced_Bot_Factory','Vehicle_Factory','Advanced_Vehicle_Factory','Air_Factory','Advanced_Air_Factory','Naval_Factory','Advanced_Naval_Factory','Orbital_Launcher','Orbital_Factory']
+  var groups = []
+
+  for (var i = 0;i < numberOfFactorys;i=i+2) {
+    api.settings.definitions.Autofactory.settings[FactoryList[i]] = {
+      title: (FactoryList[i]),
+      type: 'text',
+      default: ''
+    }
+    api.settings.definitions.Autofactory.settings[FactoryList[i+1]] = {
+      title: (FactoryList[i+1]),
+      type: 'text',
+      default: ''
+    }
+  }
+
+  
+
+  
+  model.settingDefinitions(api.settings.definitions)
+
+  model.FactoryGroups = []
+  for (var j = 0;j < numberOfFactorys;j++) {
+    model.FactoryGroups[j] = {parts: [
+      model.settingsItemMap()['Autofactory.' + FactoryList[j]],
+     
+      
+    ]}
+  }
+
+  var settingsHtml = 
+    '<div class="form-group" data-bind="foreach: FactoryGroups">' +
+      '<div class="sub-group" data-bind="foreach: parts">' +
+        '<div class="option">' +
+          '<label data-bind="text: title" >' +
+            'title' +
+          '</label>' +
+          '<!-- ko if: $data.type() === "text" -->' +
+          '<input type="text" class="form-control" value="" data-bind="value: value" />' +
+          '<!-- /ko -->' +
+        '</div>' + 
+      '</div>' + 
+    '</div>'
 	
+  var $group = $(settingsHtml).appendTo('.option-list.Autofactory')
 
-	};
-
-	_.extend(api.settings.definitions.ui.settings, af_settings_var);
-
-	//fix for settings not shown
-	//model.settingGroups.notifySubscribers(); }));
-	model.settingDefinitions(api.settings.definitions);
-	
-
-	var $group = $('<div class="sub-group"></div>').appendTo('.option-list.ui .form-group');
-  	$group.append('<div class="sub-group-title">Auto Factory</div>');
-
-  	Object.keys(af_settings_var).forEach(function(setting) {
-    	$group.append('<div class="option" data-bind="template: { name: \'setting-template\', data: $root.settingsItemMap()[\'ui.' + setting + '\'] }"></div>')
-  	});
-
-})()
+})();
