@@ -1,17 +1,17 @@
  {
    "context": "client",
-   "identifier": "dev autofac",
-   "display_name": "dev autofac",
-   "description": "dev autofac",
+   "identifier": "com.pa.ferretmaster.Autofactory",
+   "display_name": "Autofactory V2",
+   "description": "Automatically builds units in your factorys, now with full queue support",
    "author": "Ferretmaster",
-   "version": "1.0",
-   "build": "114353",
-   "date": "2020-6-13",
+   "version": "1.1",
+   "build": "114475",
+   "date": "2020-6-21",
    "signature": "not yet implemented",
 
    "forum": "",
    "priority": 100,
-   "icon": "",
+   "icon": "http://pamods.github.io/icons/tAutoFactory.png",
    "scenes": {
         "settings": [
             "coui://ui/mods/Autofactory/settings/init.js"
@@ -23,5 +23,5 @@
             "coui://ui/mods/Autofactory/live_game_options_bar/init.js"
         ]
     },
-   "category": ["balance"]
+   "category": ["ui","titans", "in-game"]
  }
