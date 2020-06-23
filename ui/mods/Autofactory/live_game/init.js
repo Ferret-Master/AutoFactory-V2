@@ -113,16 +113,16 @@ var tAutoFactory = (function () {
 		
 		//declaring default queue for each factory
 		
-		BOT_FAC = [5,DOX,false,2,SPARK,false],
-		ADVANCED_BOT_FAC = [3, SLAMMER, false, 1, BLUEHAWK, false, 1, GILE, false],
-		VEHICLE_FAC = [3, ANT, false, 2, INFERNO, false, 1, SPINNER, false, 1, SKITTER, false, 2, ANT, false],
-		ADVANCED_VEHICLE_FAC = [3, LEVELER, false, 2, SHELLER, false, 3, LEVELER, false, 2, SHELLER, false, 1, STORM, false],
-		AIR_FAC = [1, FIREFLY, true, 2, HUMMINGBIRD, false, 1, BUMBLEBEE, false, 2, HUMMINGBIRD, false],
-		ADVANCED_AIR_FAC = [2, PHOENIX, false, 2, KESTREL, false, 1, HORSEFLY, false],
-		NAVAL_FAC = [2, BARRACUDA, false, 1, NARWHAL, false, 1, ORCA, false],
-		ADVANCED_NAVAL_FAC =[1, TYPHOON, true, 2, KRAKEN, false, 1, LEVIATHAN, false ],
-		ORBITAL_LAUNCHER = [10, AVENGER, false, 2, ARTEMIS, false],
-		ORBITAL_FACTORY =[1, AVENGER, false],
+		BOT_FAC = '5,DOX,F,2,SPARK,T',
+		ADVANCED_BOT_FAC = '3,SLAMMER,F,1,BLUEHAWK,F,1,GILE,F',
+		VEHICLE_FAC = '3,ANT,F,2,INFERNO,F,1,SPINNER,F,1,SKITTER,F,2,ANT,F',
+		ADVANCED_VEHICLE_FAC = '3,LEVELER,F,2,SHELLER,F,3,LEVELER,F,2,SHELLER,F,1,STORM,F',
+		AIR_FAC = '1,FIREFLY,T,2,HUMMINGBIRD,F,1,BUMBLEBEE,F,2,HUMMINGBIRD,F',
+		ADVANCED_AIR_FAC = '2,PHOENIX,F,2,KESTREL,F,1,HORSEFLY,F',
+		NAVAL_FAC = '2,BARRACUDA,F,1,NARWHAL,F,1,ORCA,F',
+		ADVANCED_NAVAL_FAC ='1,TYPHOON,T,2,KRAKEN,F,1,LEVIATHAN,F',
+		ORBITAL_LAUNCHER = '10,AVENGER,F,2,ARTEMIS,F',
+		ORBITAL_FACTORY ='1,AVENGER,F',
 		
 		Default_List = [BOT_FAC,ADVANCED_BOT_FAC,VEHICLE_FAC,ADVANCED_VEHICLE_FAC,AIR_FAC,ADVANCED_AIR_FAC,NAVAL_FAC,ADVANCED_NAVAL_FAC,ORBITAL_LAUNCHER,ORBITAL_FACTORY], //default list of factorys for use with settings
 		
@@ -133,8 +133,13 @@ var tAutoFactory = (function () {
 		
 		//grabs each setting and splits the string
 		for (var i = 0;i < numberOfFactorys;i++) {
-			SettingsList[i] = api.settings.isSet('Autofactory', FactoryList[i], true)==undefined?Default_List[i]:api.settings.isSet('Autofactory', FactoryList[i], true).split(',');
-			
+			SettingsList[i] = api.settings.isSet('Autofactory', FactoryList[i], true)==undefined?Default_List[i]:api.settings.isSet('Autofactory', FactoryList[i], true);
+			if(SettingsList[i].length < 6){
+				SettingsList[i] = Default_List[i];
+				
+			}
+			SettingsList[i] = SettingsList[i].split(',');
+			console.log(SettingsList[i]);
 			
 		}
 		
