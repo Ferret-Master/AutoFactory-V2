@@ -139,7 +139,7 @@ var tAutoFactory = (function () {
 				
 			}
 			SettingsList[i] = SettingsList[i].split(',');
-			console.log(SettingsList[i]);
+			//console.log(SettingsList[i]);
 			
 		}
 		
