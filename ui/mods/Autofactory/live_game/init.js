@@ -21,6 +21,9 @@ var tAutoFactory = (function () {
 			//console.log(i +" : "+"attempting to queue " + amount +" " + type +" with " +priority);
 			api.unit.build(type, amount, priority);
 			api.unit.build(type+".player", amount, priority);
+			//console.log(army.factoryCount);
+			//console.log(armies[0].factoryCount);
+			//console.log(model);
 		}
 		
 		
@@ -128,6 +131,7 @@ var tAutoFactory = (function () {
 		
 		//parsing custom settings queues
 		SettingsList = [],
+		SettingsNameList = ['Seconds Before Activation'],
 		numberOfFactorys = 10,
 		FactoryList = ['Bot_Factory','Advanced_Bot_Factory','Vehicle_Factory','Advanced_Vehicle_Factory','Air_Factory','Advanced_Air_Factory','Naval_Factory','Advanced_Naval_Factory','Orbital_Launcher','Orbital_Factory'];
 		
@@ -142,6 +146,12 @@ var tAutoFactory = (function () {
 			console.log(SettingsList[i]);
 			
 		}
+		var CurrentTime;
+		var StartTime = api.settings.isSet('Autofactory', SettingsNameList[0], true)==undefined?"0":api.settings.isSet('Autofactory', SettingsNameList[0], true);
+		console.log(StartTime);
+		StartTime = parseInt(StartTime,10);
+		console.log(StartTime);
+		if(!(StartTime > 10)){StartTime = 0;}
 		
 		//parses the settings so they are useable
 		for (var a = 0; a<SettingsList.length;a++) {
@@ -216,7 +226,7 @@ var tAutoFactory = (function () {
 
     
 
-   
+    var landTime = 2000000000000
 //update
     tAutoFactory.update = function (exec_type) {
 
@@ -224,8 +234,14 @@ var tAutoFactory = (function () {
         if (exec_type === undefined) {
             exec_type = 'auto';
         }
-
-        if ( ((exec_type === 'manual') || ((exec_type === 'auto') && !model.hasSelection()))  && model.maxEnergy() !== 0 ) {
+		
+			
+        if ( ((exec_type === 'manual') || ((exec_type === 'auto') && !model.hasSelection()))  && model.maxEnergy() > 0 ) {
+			console.log(landTime-landTime)
+		//console.log(StartTime)
+		console.log((Date.now()-landTime)/1000)
+		if(Date.now()<landTime){landTime = Date.now();}
+			if(Date.now() > StartTime*1000 + landTime){
             //if user hasn't selected anything && we're playing
 
                var selected_enabled = 0;//if idle factories have been selected
@@ -330,6 +346,7 @@ var tAutoFactory = (function () {
                 }
 
             }
+		}
         }
     };
 
@@ -347,6 +364,8 @@ var tAutoFactory = (function () {
         else if(payload === 'true')
             tAutoFactory.active = true;
     };
+	
+	
 
     //update every 3 seconds
 	//change this if you want slightly more reliability, be careful though
