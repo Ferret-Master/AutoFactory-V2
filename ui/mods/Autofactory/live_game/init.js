@@ -143,14 +143,14 @@ var tAutoFactory = (function () {
 				
 			}
 			SettingsList[i] = SettingsList[i].split(',');
-			console.log(SettingsList[i]);
+			//console.log(SettingsList[i]);
 			
 		}
 		var CurrentTime;
 		var StartTime = api.settings.isSet('Autofactory', SettingsNameList[0], true)==undefined?"0":api.settings.isSet('Autofactory', SettingsNameList[0], true);
-		console.log(StartTime);
+		//console.log(StartTime);
 		StartTime = parseInt(StartTime,10);
-		console.log(StartTime);
+		//console.log(StartTime);
 		if(!(StartTime > 10)){StartTime = 0;}
 		
 		//parses the settings so they are useable
@@ -237,9 +237,9 @@ var tAutoFactory = (function () {
 		
 			
         if ( ((exec_type === 'manual') || ((exec_type === 'auto') && !model.hasSelection()))  && model.maxEnergy() > 0 ) {
-			console.log(landTime-landTime)
+			//console.log(landTime-landTime)
 		//console.log(StartTime)
-		console.log((Date.now()-landTime)/1000)
+		//console.log((Date.now()-landTime)/1000)
 		if(Date.now()<landTime){landTime = Date.now();}
 			if(Date.now() > StartTime*1000 + landTime){
             //if user hasn't selected anything && we're playing
