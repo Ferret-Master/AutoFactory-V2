@@ -18,17 +18,23 @@
 	//the following section of code used wondibles connect buttons mod as reference so is fairly similar; credit to him for making working text input in settings menu as I could find no other reference	
 	
   var numberOfFactorys = 10
+  var numberOfSettings = 1
+  var SettingsListTitle = ['Seconds Before Activation from landing']
+  var SettingsList = ['Seconds Before Activation']
   var FactoryList = ['Bot_Factory','Advanced_Bot_Factory','Vehicle_Factory','Advanced_Vehicle_Factory','Air_Factory','Advanced_Air_Factory','Naval_Factory','Advanced_Naval_Factory','Orbital_Launcher','Orbital_Factory']
   var groups = []
 
-  for (var i = 0;i < numberOfFactorys;i=i+2) {
+  for (var i = 0;i < numberOfFactorys;i=i+1) {
     api.settings.definitions.Autofactory.settings[FactoryList[i]] = {
       title: (FactoryList[i]),
       type: 'text',
       default: ''
     }
-    api.settings.definitions.Autofactory.settings[FactoryList[i+1]] = {
-      title: (FactoryList[i+1]),
+  }
+  
+  for (var i = 0;i < numberOfSettings;i=i+1) {
+    api.settings.definitions.Autofactory.settings[SettingsList[i]] = {
+      title: (SettingsListTitle[i]),
       type: 'text',
       default: ''
     }
@@ -43,10 +49,18 @@
   for (var j = 0;j < numberOfFactorys;j++) {
     model.FactoryGroups[j] = {parts: [
       model.settingsItemMap()['Autofactory.' + FactoryList[j]],
+      
+      
+    ]}
+  }
+  for (var j = numberOfFactorys;j < numberOfFactorys+numberOfSettings;j++) {
+    model.FactoryGroups[j] = {parts: [
+      model.settingsItemMap()['Autofactory.' + SettingsList[j-numberOfFactorys]],
      
       
     ]}
   }
+  
 
   var settingsHtml = 
     '<div class="form-group" data-bind="foreach: FactoryGroups">' +

@@ -6,12 +6,16 @@ var tAutoFactory_op_bar = (function () {
 	    return tAutoFactory_op_bar;
 })();
 
+
+
 (function () {
     "use strict";
 
     //console.log("af roll call live game init create ui");
 
     //visible to knockout
+	
+    
     model.tAutoFactory_op_bar = tAutoFactory_op_bar;
 
     //add toggle to live_game bottom bar
