@@ -21,7 +21,10 @@
         ],
         "live_game_options_bar": [
             "coui://ui/mods/Autofactory/live_game_options_bar/init.js"
-        ]
+        ],
+        "live_game_time_bar": [
+            "coui://ui/mods/Autofactory/live_game/AutoFactoryTime.js"
+         ]    
     },
    "category": ["ui","titans", "in-game"]
  }
