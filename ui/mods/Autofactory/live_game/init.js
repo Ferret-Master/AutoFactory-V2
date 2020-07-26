@@ -300,8 +300,8 @@ var tAutoFactory = (function () {
     }
 
     
-
-    var landTime = 2000000000000;
+	var landTime = 200000;
+    model.TimeSinceLanding = 0;
 //update
     tAutoFactory.update = function (exec_type) {
 
@@ -315,8 +315,9 @@ var tAutoFactory = (function () {
 			//console.log(landTime-landTime)
 		//console.log(StartTime)
 		//console.log((Date.now()-landTime)/1000)
-		if(Date.now()<landTime){landTime = Date.now();}
-			if(Date.now() > StartTime*1000 + landTime){
+		if(model.TimeSinceLanding<landTime && model.TimeSinceLanding !== 0){landTime = model.TimeSinceLanding}
+			console.log("Time since landing = "+model.TimeSinceLanding+" Start time set as : "+StartTime+" Land time is "+landTime)
+			if((model.TimeSinceLanding > (landTime + StartTime)|| StartTime + 240 <model.TimeSinceLanding)&&(model.paused() === false)){
             //if user hasn't selected anything && we're playing
 
                var selected_enabled = 0;//if idle factories have been selected
@@ -430,9 +431,10 @@ var tAutoFactory = (function () {
 
             }
 		}
-        }
+		}
+		setTimeout(tAutoFactory.update, 1000);
     };
-
+    
     return tAutoFactory;
 })();
 
@@ -447,12 +449,16 @@ var tAutoFactory = (function () {
         else if(payload === 'true')
             tAutoFactory.active = true;
     };
-	
+	handlers.AFtime = function(payload) {
+		console.log("time handler called with "+ payload)
+		model.TimeSinceLanding = payload;
+	 };
 	
 
     //update every 3 seconds
 	//change this if you want slightly more reliability, be careful though
-    setInterval(tAutoFactory.update, 1000);
+	setTimeout(tAutoFactory.update, 1000);
+	console.log("timeout set")
 
     //visible to knockout
     model.tAutoFactory = tAutoFactory;
