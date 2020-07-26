@@ -4,9 +4,9 @@
    "display_name": "Autofactory V2",
    "description": "Automatically builds units in your factorys, now with full queue support",
    "author": "Ferretmaster",
-   "version": "1.13",
-   "build": "114475",
-   "date": "2020-6-27",
+   "version": "1.14",
+   "build": "114780",
+   "date": "2020-07-26",
    "signature": "not yet implemented",
 
    "forum": "https://forums.planetaryannihilation.com/threads/rel-client-autofactory-v2.73481/",
