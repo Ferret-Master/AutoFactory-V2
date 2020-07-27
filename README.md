@@ -2,6 +2,8 @@ Autofactory V2 by FerretMaster
 
 Modified autofactory by TrialQ to improve and change it
 
+Icon by Marshall
+
 Removed Features:
 
  - Power settings per factory, power is now ignored when auto queuing
