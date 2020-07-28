@@ -316,7 +316,7 @@ var tAutoFactory = (function () {
 		//console.log(StartTime)
 		//console.log((Date.now()-landTime)/1000)
 		if(model.TimeSinceLanding<landTime && model.TimeSinceLanding !== 0){landTime = model.TimeSinceLanding}
-			console.log("Time since landing = "+model.TimeSinceLanding+" Start time set as : "+StartTime+" Land time is "+landTime)
+			//console.log("Time since landing = "+model.TimeSinceLanding+" Start time set as : "+StartTime+" Land time is "+landTime)
 			if((model.TimeSinceLanding > (landTime + StartTime)|| StartTime + 240 <model.TimeSinceLanding)&&(model.paused() === false)){
             //if user hasn't selected anything && we're playing
 
@@ -450,7 +450,7 @@ var tAutoFactory = (function () {
             tAutoFactory.active = true;
     };
 	handlers.AFtime = function(payload) {
-		console.log("time handler called with "+ payload)
+		//console.log("time handler called with "+ payload)
 		model.TimeSinceLanding = payload;
 	 };
 	
@@ -458,7 +458,7 @@ var tAutoFactory = (function () {
     //update every 3 seconds
 	//change this if you want slightly more reliability, be careful though
 	setTimeout(tAutoFactory.update, 1000);
-	console.log("timeout set")
+	//console.log("timeout set")
 
     //visible to knockout
     model.tAutoFactory = tAutoFactory;
