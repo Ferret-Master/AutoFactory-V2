@@ -20,7 +20,9 @@ var tAutoFactory = (function () {
 			priority = FACNAME[i+2];
 			//console.log(i +" : "+"attempting to queue " + amount +" " + type +" with " +priority);
 			api.unit.build(type, amount, priority);
-			//api.unit.build(type+".player", amount, priority);
+
+			api.unit.build(type+".player", amount, priority);
+
 			//console.log(army.factoryCount);
 			//console.log(armies[0].factoryCount);
 			//console.log(model);
@@ -300,9 +302,10 @@ var tAutoFactory = (function () {
     }
 
     
+
 	var landTime = 200000;
     model.TimeSinceLanding = 0;
-//update
+
     tAutoFactory.update = function (exec_type) {
 
 
@@ -311,6 +314,7 @@ var tAutoFactory = (function () {
         }
 		
 			
+
         if ( ((exec_type === 'manual') && model.gameOver == false|| ((exec_type === 'auto') && !model.hasSelection()))  && model.maxEnergy() > 0 && model.gameOver == false) {
 			//console.log(landTime-landTime)
 		//console.log(StartTime)
@@ -318,6 +322,7 @@ var tAutoFactory = (function () {
 		if(model.TimeSinceLanding<landTime && model.TimeSinceLanding !== 0){landTime = model.TimeSinceLanding}
 			//console.log("Time since landing = "+model.TimeSinceLanding+" Start time set as : "+StartTime+" Land time is "+landTime)
 			if((model.TimeSinceLanding > (landTime + StartTime)|| StartTime + 240 <model.TimeSinceLanding)&&(model.paused() === false)){
+
             //if user hasn't selected anything && we're playing
 
                var selected_enabled = 0;//if idle factories have been selected
@@ -431,8 +436,10 @@ var tAutoFactory = (function () {
 
             }
 		}
+
 		}
 		setTimeout(tAutoFactory.update, 1000);
+
     };
     
     return tAutoFactory;
@@ -449,10 +456,12 @@ var tAutoFactory = (function () {
         else if(payload === 'true')
             tAutoFactory.active = true;
     };
+
 	handlers.AFtime = function(payload) {
 		//console.log("time handler called with "+ payload)
 		model.TimeSinceLanding = payload;
 	 };
+
 	
 
     //update every 3 seconds

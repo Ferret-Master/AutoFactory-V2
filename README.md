@@ -20,6 +20,7 @@ New Features:
  
  - setting that lets you specify how far into the game you want it to start(won't work well with disconnects with the way the timer is implemented)
  
+
  Fixed Bugs from the first mod:
  
  - Fixed t1 units getting queued in t2 factorys

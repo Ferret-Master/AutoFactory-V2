@@ -6,9 +6,8 @@
    "author": "Ferretmaster",
    "version": "1.16",
    "build": "115050",
-   "date": "2020-07-27",
+   "date": "2020-12-05",
    "signature": "not yet implemented",
-
    "forum": "https://forums.planetaryannihilation.com/threads/rel-client-autofactory-v2.73481/",
    "priority": 100,
    "icon": "https://github.com/ferret-Master/AutoFactory-V2/blob/Release/AutoFactory.png?raw=true",
