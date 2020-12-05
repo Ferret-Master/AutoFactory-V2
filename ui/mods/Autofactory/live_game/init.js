@@ -315,7 +315,7 @@ var tAutoFactory = (function () {
 		
 			
 
-        if ( ((exec_type === 'manual') && model.gameOver == false|| ((exec_type === 'auto') && !model.hasSelection()))  && model.maxEnergy() > 0 && model.gameOver == false) {
+        if ( ((exec_type === 'manual') && model.gameOver() == false|| ((exec_type === 'auto') && !model.hasSelection()))  && model.maxEnergy() > 0 && model.gameOver() == false) {
 			//console.log(landTime-landTime)
 		//console.log(StartTime)
 		//console.log((Date.now()-landTime)/1000)
