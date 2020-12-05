@@ -2,6 +2,8 @@ Autofactory V2 by FerretMaster
 
 Modified autofactory by TrialQ to improve and change it
 
+Icon by Marshall
+
 Removed Features:
 
  - Power settings per factory, power is now ignored when auto queuing
@@ -18,7 +20,8 @@ New Features:
  
  - setting that lets you specify how far into the game you want it to start(won't work well with disconnects with the way the timer is implemented)
  
- Fixed Bugs:
+
+ Fixed Bugs from the first mod:
  
  - Fixed t1 units getting queued in t2 factorys
 
@@ -29,6 +32,10 @@ The default queues should be useable for most players, but you can make your own
 
 
 common name list: [ANT,VEHICLE_FAB,SKITTER,SPINNER,INFERNO,GRENADIER,DOX,SLAMMER,GILE,BOT_FAB,STITCH,BLUEHAWK,COLONEL,LOCUST,BOOM,SPARK,HUMMINGBIRD,AIR_FAB,FIREFLY,BUMBLEBEE,NAVAL_FAB,PIRANHA,NARWHAL,ORCA,BARRACUDA,ICARUS,SOLAR_ARRAY,PELICAN,KESTREL,HORSEFLY,ANGEL,WYRM,HORNET,PHOENIX,KAIJU,KRAKEN,STINGRAY,LEVIATHAN,TYPHOON,STRYKER,DRIFTER,LEVELER,STORM,SHELLER,VANGUARD,MANHATTAN,ASTRAEUS,HERMES,AVENGER,ARTEMIS,SSX,OMEGA,ORBITAL_FAB,ADVANCED_BOT_FAB,ADVANCED_VEHICLE_FAB,ADVANCED_AIR_FAB,ADVANCED_NAVAL_FAB,BARNACLE,MEND]
+
+To set your own queue you repeat the format (amount as a number,unitname as common name in all caps,priority as F or T) as much as you want
+
+e.g (5,DOX,F,2,SPARK,F)
 
 For those that choose not to customise the default queues are as follows:
 
@@ -49,7 +56,7 @@ For those that choose not to customise the default queues are as follows:
 
 	ADVANCED_NAVAL_FAC : 1 priority built typhoon, 2 krakens, 1 leviathen
 
-	ORBITAL_LAUNCHER: 10 avengers, 2 artemis
+	ORBITAL_LAUNCHER: 1 avenger
 
-	ORBITAL_FACTORY: 1 avenger
+	ORBITAL_FACTORY: 10 avengers, 2 artemis 
 

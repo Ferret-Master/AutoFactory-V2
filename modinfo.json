@@ -4,14 +4,13 @@
    "display_name": "Autofactory V2",
    "description": "Automatically builds units in your factorys, now with full queue support",
    "author": "Ferretmaster",
-   "version": "1.13",
+   "version": "1.16",
    "build": "115050",
-   "date": "2020-6-24",
+   "date": "2020-12-05",
    "signature": "not yet implemented",
-
    "forum": "https://forums.planetaryannihilation.com/threads/rel-client-autofactory-v2.73481/",
    "priority": 100,
-   "icon": "http://pamods.github.io/icons/tAutoFactory.png",
+   "icon": "https://github.com/ferret-Master/AutoFactory-V2/blob/Release/AutoFactory.png?raw=true",
    "scenes": {
         "settings": [
             "coui://ui/mods/Autofactory/settings/init.js"
@@ -21,7 +20,10 @@
         ],
         "live_game_options_bar": [
             "coui://ui/mods/Autofactory/live_game_options_bar/init.js"
-        ]
+        ],
+        "live_game_time_bar": [
+            "coui://ui/mods/Autofactory/live_game/AutoFactoryTime.js"
+         ]    
     },
    "category": ["ui","titans", "in-game"]
  }

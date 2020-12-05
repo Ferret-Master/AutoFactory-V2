@@ -11,7 +11,7 @@ var tAutoFactory = (function () {
 	
 	//function to build using the queue list
 	function buildFromQueue(FACNAME){
-		
+		//console.log(FACNAME);
 		var i;
 		
 		for (i = 0; i < FACNAME.length; i=i+3) {
@@ -20,7 +20,9 @@ var tAutoFactory = (function () {
 			priority = FACNAME[i+2];
 			//console.log(i +" : "+"attempting to queue " + amount +" " + type +" with " +priority);
 			api.unit.build(type, amount, priority);
+
 			api.unit.build(type+".player", amount, priority);
+
 			//console.log(army.factoryCount);
 			//console.log(armies[0].factoryCount);
 			//console.log(model);
@@ -116,7 +118,7 @@ var tAutoFactory = (function () {
 		
 		//declaring default queue for each factory
 		
-		BOT_FAC = '5,DOX,F,2,SPARK,T',
+		BOT_FAC = '5,DOX,F,2,SPARK,F',
 		ADVANCED_BOT_FAC = '3,SLAMMER,F,1,BLUEHAWK,F,1,GILE,F',
 		VEHICLE_FAC = '3,ANT,F,2,INFERNO,F,1,SPINNER,F,1,SKITTER,F,2,ANT,F',
 		ADVANCED_VEHICLE_FAC = '3,LEVELER,F,2,SHELLER,F,3,LEVELER,F,2,SHELLER,F,1,STORM,F',
@@ -124,8 +126,8 @@ var tAutoFactory = (function () {
 		ADVANCED_AIR_FAC = '2,PHOENIX,F,2,KESTREL,F,1,HORSEFLY,F',
 		NAVAL_FAC = '2,BARRACUDA,F,1,NARWHAL,F,1,ORCA,F',
 		ADVANCED_NAVAL_FAC ='1,TYPHOON,T,2,KRAKEN,F,1,LEVIATHAN,F',
-		ORBITAL_LAUNCHER = '10,AVENGER,F,2,ARTEMIS,F',
-		ORBITAL_FACTORY ='1,AVENGER,F',
+		ORBITAL_FACTORY = '10,AVENGER,F,2,ARTEMIS,F',
+		ORBITAL_LAUNCHER ='1,AVENGER,F',
 		
 		Default_List = [BOT_FAC,ADVANCED_BOT_FAC,VEHICLE_FAC,ADVANCED_VEHICLE_FAC,AIR_FAC,ADVANCED_AIR_FAC,NAVAL_FAC,ADVANCED_NAVAL_FAC,ORBITAL_LAUNCHER,ORBITAL_FACTORY], //default list of factorys for use with settings
 		
@@ -153,37 +155,110 @@ var tAutoFactory = (function () {
 		//console.log(StartTime);
 		if(!(StartTime > 10)){StartTime = 0;}
 		
-		//parses the settings so they are useable
-		for (var a = 0; a<SettingsList.length;a++) {
+		
+		
+		function parseBuildQueue(Queue){
 			
-			for (var b = 0;b<SettingsList[a].length;b++){
-				
-				
-				if (SettingsList[a][b] === "T"){
-					SettingsList[a][b] = true;
-					
+			for (var b = 0;b<Queue.length;b++){
+				if (Queue.length%3 !== 0){
+					console.log("flagged " + Queue + " as for incorrect length");
+					Queue = false;
 				}
-				if (SettingsList[a][b] === "F"){
 					
-					SettingsList[a][b] = false;
+					if(Queue !== false){	
 					
-					}
-				
-				
-				for (i = 0; i<String_List.length;i++){
-					
-					
-					if (String_List[i] === SettingsList[a][b] ){
+					if (Queue[b] !== "F" && Queue[b] !== "T" && b%3 === 2){
 						
-						SettingsList[a][b] = Unit_List[i];
+						console.log("changed " + Queue[b] + " to default false");
+						Queue[b] = false;
+						
+					}
+					
+					if (Queue[b] === "T"){
+						Queue[b] = true;
+						
+					}
+					if (Queue[b] === "F"){
+						
+						Queue[b] = false;
 						
 						}
 					
 					
-				}
+					
+					if ( b%3 === 0){ //checking that number being checked is in the right spot
+						
+						//checking if the set number is valid
+					
+					var defaultAmount = 1; // A default result.
+					var amount = parseInt(Queue[b],10); 
+					
+					if (isNaN(amount)){
+						
+						amount = defaultAmount; //sets the number of units to 1 if it is invalid
+					
+						console.log("changed " + amount + " to 1 due to it being an invalid amount");
+					} 
+					
+						Queue[b] = Math.abs(amount);
+					
+					} 
+					
+					var validUnit = false;
+					
+					if (b%3 === 1){
+					for (i = 0; i<String_List.length;i++){
+						
+						//console.log(String_List[i] + " === " + SettingsList[a][b]);
+						
+						if (String_List[i] === Queue[b]){
+							
+							
+							
+							Queue[b] = Unit_List[i];
+							validUnit = true; // if valid unit is found, tells program to not mark the queue as invalid
+							
+							}
+						
+					}
+					if(validUnit === false){
+						
+						console.log("flagged " + SettingsList[a] + "for non valid unit");
+						Queue = false;
+						
+						}
+						
+					}
 				
-			} 
+				} 
+			}
+			
+			
+			
+			return Queue;
 		}
+		
+		
+		
+		
+		//parses the settings so they are useable
+		for (var a = 0; a<SettingsList.length;a++) {
+			SettingsList[a] = parseBuildQueue(SettingsList[a])
+			
+		}
+		//parses Default queues in case they are needed
+		
+		
+		BOT_FAC = parseBuildQueue(BOT_FAC.split(',')),
+		ADVANCED_BOT_FAC = parseBuildQueue(ADVANCED_BOT_FAC.split(',')),
+		VEHICLE_FAC = parseBuildQueue(VEHICLE_FAC.split(',')),
+		ADVANCED_VEHICLE_FAC = parseBuildQueue(ADVANCED_VEHICLE_FAC.split(',')),
+		AIR_FAC = parseBuildQueue(AIR_FAC.split(',')),
+		ADVANCED_AIR_FAC = parseBuildQueue(ADVANCED_AIR_FAC.split(',')),
+		NAVAL_FAC = parseBuildQueue(NAVAL_FAC.split(',')),
+		ADVANCED_NAVAL_FAC = parseBuildQueue(ADVANCED_NAVAL_FAC.split(',')),
+		ORBITAL_FACTORY = parseBuildQueue(ORBITAL_FACTORY.split(',')),
+		ORBITAL_LAUNCHER = parseBuildQueue(ORBITAL_LAUNCHER.split(','));
 		//declaring the custom settings 
 		
 		var BOT_FAC_CUSTOM,ADVANCED_BOT_FAC_CUSTOM,VEHICLE_FAC_CUSTOM,ADVANCED_VEHICLE_FAC_CUSTOM,AIR_FAC_CUSTOM,ADVANCED_AIR_FAC_CUSTOM,NAVAL_FAC_CUSTOM,ADVANCED_NAVAL_FAC_CUSTOM,ORBITAL_LAUNCHER_CUSTOM,ORBITAL_FACTORY_CUSTOM;
@@ -205,16 +280,18 @@ var tAutoFactory = (function () {
     var AutoFactory_Choice = 'Custom';//no longer a need to differentiate due to defaults auto applying, mabye in future versions
 	if(AutoFactory_Choice === 'Custom'){
 		
-		BOT_FAC = Custom_List[0];
-		ADVANCED_BOT_FAC =Custom_List[1];
-		VEHICLE_FAC =Custom_List[2];
-		ADVANCED_VEHICLE_FAC =Custom_List[3];
-		AIR_FAC =Custom_List[4];
-		ADVANCED_AIR_FAC =Custom_List[5];
-		NAVAL_FAC =Custom_List[6];
-		ADVANCED_NAVAL_FAC =Custom_List[7];
-		ORBITAL_LAUNCHER =Custom_List[8];
-		ORBITAL_FACTORY =Custom_List[9];
+		//checking if the queues were valid and leaving as defaults if they are not
+		
+		if(Custom_List[0] !== false){BOT_FAC = Custom_List[0];}
+		if(Custom_List[1] !== false){ADVANCED_BOT_FAC =Custom_List[1];}
+		if(Custom_List[2] !== false){VEHICLE_FAC =Custom_List[2];}
+		if(Custom_List[3] !== false){ADVANCED_VEHICLE_FAC =Custom_List[3];}
+		if(Custom_List[4] !== false){AIR_FAC =Custom_List[4];}
+		if(Custom_List[5] !== false){ADVANCED_AIR_FAC =Custom_List[5];}
+		if(Custom_List[6] !== false){NAVAL_FAC =Custom_List[6];}
+		if(Custom_List[7] !== false){ADVANCED_NAVAL_FAC =Custom_List[7];}
+		if(Custom_List[8] !== false){ORBITAL_LAUNCHER =Custom_List[8];}
+		if(Custom_List[9] !== false){ORBITAL_FACTORY =Custom_List[9];}
 		
 	}
 	
@@ -226,8 +303,9 @@ var tAutoFactory = (function () {
 
     
 
-    var landTime = 2000000000000
-//update
+	var landTime = 200000;
+    model.TimeSinceLanding = 0;
+
     tAutoFactory.update = function (exec_type) {
 
 
@@ -236,12 +314,15 @@ var tAutoFactory = (function () {
         }
 		
 			
-        if ( ((exec_type === 'manual') && model.gameOver == false || ((exec_type === 'auto') && !model.hasSelection()))  && model.maxEnergy() > 0 && model.gameOver == false ) {
+
+        if ( ((exec_type === 'manual') && model.gameOver == false|| ((exec_type === 'auto') && !model.hasSelection()))  && model.maxEnergy() > 0 && model.gameOver == false) {
 			//console.log(landTime-landTime)
 		//console.log(StartTime)
 		//console.log((Date.now()-landTime)/1000)
-		if(Date.now()<landTime){landTime = Date.now();}
-			if(Date.now() > StartTime*1000 + landTime){
+		if(model.TimeSinceLanding<landTime && model.TimeSinceLanding !== 0){landTime = model.TimeSinceLanding}
+			//console.log("Time since landing = "+model.TimeSinceLanding+" Start time set as : "+StartTime+" Land time is "+landTime)
+			if((model.TimeSinceLanding > (landTime + StartTime)|| StartTime + 240 <model.TimeSinceLanding)&&(model.paused() === false)){
+
             //if user hasn't selected anything && we're playing
 
                var selected_enabled = 0;//if idle factories have been selected
@@ -249,10 +330,12 @@ var tAutoFactory = (function () {
             if (tAutoFactory.active) {
                 //if we possibly want to auto-build
 				//all t2 facs queued before t1 so we can deselect advanced factories to prevent t1 units queued in them
+				
                 if (t2_bot_use === 1) {
                     if(selected_enabled === 0) {//select idle factories if we haven't yet
                         
                         api.select.allIdleFactories();
+						api.select.fromSelectionWithTypeFilter('Basic', null, true);
                         selected_enabled = 1;
                     }
 					
@@ -261,6 +344,7 @@ var tAutoFactory = (function () {
                 if (t2_veh_use === 1) {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
+						api.select.fromSelectionWithTypeFilter('Basic', null, true);
                         selected_enabled = 1;
                     }
                      buildFromQueue(ADVANCED_VEHICLE_FAC);
@@ -269,6 +353,7 @@ var tAutoFactory = (function () {
                 if (t2_air_use === 1) {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
+						api.select.fromSelectionWithTypeFilter('Basic', null, true);
                         selected_enabled = 1;
                     }
                      buildFromQueue(ADVANCED_AIR_FAC);
@@ -276,6 +361,7 @@ var tAutoFactory = (function () {
                 if (t2_nav_use === 1) {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
+						api.select.fromSelectionWithTypeFilter('Basic', null, true);
                         selected_enabled = 1;
                     }
                      buildFromQueue(ADVANCED_NAVAL_FAC);
@@ -283,10 +369,12 @@ var tAutoFactory = (function () {
                 if (t2_orb_use === 1) {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
+						api.select.fromSelectionWithTypeFilter('Basic', null, true);
                         selected_enabled = 1;
                     }
                      buildFromQueue(ORBITAL_FACTORY);
                 }
+				api.select.allIdleFactories();
                 if (t1_bot_use === 1) {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
@@ -337,7 +425,8 @@ var tAutoFactory = (function () {
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
-                     buildFromQueue(ORBITAL_LAUNCHER);
+					
+                    buildFromQueue(ORBITAL_LAUNCHER);
                 }
 
               
@@ -347,9 +436,12 @@ var tAutoFactory = (function () {
 
             }
 		}
-        }
-    };
 
+		}
+		setTimeout(tAutoFactory.update, 1000);
+
+    };
+    
     return tAutoFactory;
 })();
 
@@ -364,12 +456,18 @@ var tAutoFactory = (function () {
         else if(payload === 'true')
             tAutoFactory.active = true;
     };
-	
+
+	handlers.AFtime = function(payload) {
+		//console.log("time handler called with "+ payload)
+		model.TimeSinceLanding = payload;
+	 };
+
 	
 
     //update every 3 seconds
 	//change this if you want slightly more reliability, be careful though
-    setInterval(tAutoFactory.update, 1000);
+	setTimeout(tAutoFactory.update, 1000);
+	//console.log("timeout set")
 
     //visible to knockout
     model.tAutoFactory = tAutoFactory;
