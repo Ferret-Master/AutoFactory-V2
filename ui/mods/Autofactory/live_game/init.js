@@ -4,7 +4,7 @@ var tAutoFactory = (function () {
 	
 	//function to build using the queue list
 	function buildFromQueue(FACNAME){
-	
+		engine.call('set_order_state', 'build', 'continuous');
 		var i;
 		
 		for (i = 0; i < FACNAME.length; i=i+3) {
@@ -316,7 +316,7 @@ var tAutoFactory = (function () {
                         
                         api.select.allIdleFactories();
 						api.select.fromSelectionWithTypeFilter('Basic', null, true);
-						model.selectionBuildStanceContinuous();
+					
                         selected_enabled = 1;
                     }
 					
@@ -326,7 +326,7 @@ var tAutoFactory = (function () {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
 						api.select.fromSelectionWithTypeFilter('Basic', null, true);
-						model.selectionBuildStanceContinuous();
+					
                         selected_enabled = 1;
                     }
                      buildFromQueue(ADVANCED_VEHICLE_FAC);
@@ -336,7 +336,7 @@ var tAutoFactory = (function () {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
 						api.select.fromSelectionWithTypeFilter('Basic', null, true);
-						model.selectionBuildStanceContinuous();
+						
                         selected_enabled = 1;
                     }
                      buildFromQueue(ADVANCED_AIR_FAC);
@@ -345,7 +345,7 @@ var tAutoFactory = (function () {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
 						api.select.fromSelectionWithTypeFilter('Basic', null, true);
-						model.selectionBuildStanceContinuous();
+						
                         selected_enabled = 1;
                     }
                      buildFromQueue(ADVANCED_NAVAL_FAC);
@@ -354,7 +354,7 @@ var tAutoFactory = (function () {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
 						api.select.fromSelectionWithTypeFilter('Basic', null, true);
-						model.selectionBuildStanceContinuous();
+						
                         selected_enabled = 1;
                     }
                      buildFromQueue(ORBITAL_FACTORY);
@@ -363,7 +363,7 @@ var tAutoFactory = (function () {
                 if (t1_bot_use === 1) {
                     if(selected_enabled === 0) {
 						api.select.allIdleFactories();
-						model.selectionBuildStanceContinuous();
+						
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
@@ -376,7 +376,7 @@ var tAutoFactory = (function () {
 					
                     if(selected_enabled === 0) {
 						api.select.allIdleFactories();
-						model.selectionBuildStanceContinuous();
+					
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
@@ -389,7 +389,7 @@ var tAutoFactory = (function () {
                 if (t1_air_use === 1) {
                     if(selected_enabled === 0) {
 						api.select.allIdleFactories();
-						model.selectionBuildStanceContinuous();
+						
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
@@ -400,7 +400,7 @@ var tAutoFactory = (function () {
                 if (t1_nav_use === 1) {
                     if(selected_enabled === 0) {
 						api.select.allIdleFactories();
-						model.selectionBuildStanceContinuous();
+						
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
@@ -411,7 +411,7 @@ var tAutoFactory = (function () {
                 if (t1_orb_use === 1) {
                     if(selected_enabled === 0) {
 						api.select.allIdleFactories();
-						model.selectionBuildStanceContinuous();
+						
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
