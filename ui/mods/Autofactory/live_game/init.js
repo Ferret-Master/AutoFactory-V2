@@ -1,36 +1,20 @@
-//customisation is moved to a settings menu, while easier to use it is less powerful for now
-
-
-
-
-
-
 
 var tAutoFactory = (function () {
     "use strict";
 	
 	//function to build using the queue list
 	function buildFromQueue(FACNAME){
-		//console.log(FACNAME);
+	
 		var i;
 		
 		for (i = 0; i < FACNAME.length; i=i+3) {
 			var amount = parseInt(FACNAME[i],10),  //parses custom setting amounts
 			type = (FACNAME[i+1]),
 			priority = FACNAME[i+2];
-			//console.log(i +" : "+"attempting to queue " + amount +" " + type +" with " +priority);
+			
 			api.unit.build(type, amount, priority);
 
-			api.unit.build(type+".player", amount, priority);
-
-			//console.log(army.factoryCount);
-			//console.log(armies[0].factoryCount);
-			//console.log(model);
 		}
-		
-		
-		
-		
 		
 	}
 
@@ -145,14 +129,14 @@ var tAutoFactory = (function () {
 				
 			}
 			SettingsList[i] = SettingsList[i].split(',');
-			//console.log(SettingsList[i]);
+		
 			
 		}
 		var CurrentTime;
 		var StartTime = api.settings.isSet('Autofactory', SettingsNameList[0], true)==undefined?"0":api.settings.isSet('Autofactory', SettingsNameList[0], true);
-		//console.log(StartTime);
+	
 		StartTime = parseInt(StartTime,10);
-		//console.log(StartTime);
+	
 		if(!(StartTime > 10)){StartTime = 0;}
 		
 		
@@ -209,7 +193,6 @@ var tAutoFactory = (function () {
 					if (b%3 === 1){
 					for (i = 0; i<String_List.length;i++){
 						
-						//console.log(String_List[i] + " === " + SettingsList[a][b]);
 						
 						if (String_List[i] === Queue[b]){
 							
@@ -312,13 +295,10 @@ var tAutoFactory = (function () {
         if (exec_type === undefined) {
             exec_type = 'auto';
         }
-		
-			
 
         if ( ((exec_type === 'manual') && model.gameOver() == false|| ((exec_type === 'auto') && !model.hasSelection()))  && model.maxEnergy() > 0 && model.gameOver() == false) {
-			//console.log(landTime-landTime)
-		//console.log(StartTime)
-		//console.log((Date.now()-landTime)/1000)
+
+		
 		if(model.TimeSinceLanding<landTime && model.TimeSinceLanding !== 0){landTime = model.TimeSinceLanding}
 			//console.log("Time since landing = "+model.TimeSinceLanding+" Start time set as : "+StartTime+" Land time is "+landTime)
 			if((model.TimeSinceLanding > (landTime + StartTime)|| StartTime + 240 <model.TimeSinceLanding)&&(model.paused() === false)){
@@ -336,6 +316,7 @@ var tAutoFactory = (function () {
                         
                         api.select.allIdleFactories();
 						api.select.fromSelectionWithTypeFilter('Basic', null, true);
+						model.selectionBuildStanceContinuous();
                         selected_enabled = 1;
                     }
 					
@@ -345,6 +326,7 @@ var tAutoFactory = (function () {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
 						api.select.fromSelectionWithTypeFilter('Basic', null, true);
+						model.selectionBuildStanceContinuous();
                         selected_enabled = 1;
                     }
                      buildFromQueue(ADVANCED_VEHICLE_FAC);
@@ -354,6 +336,7 @@ var tAutoFactory = (function () {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
 						api.select.fromSelectionWithTypeFilter('Basic', null, true);
+						model.selectionBuildStanceContinuous();
                         selected_enabled = 1;
                     }
                      buildFromQueue(ADVANCED_AIR_FAC);
@@ -362,6 +345,7 @@ var tAutoFactory = (function () {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
 						api.select.fromSelectionWithTypeFilter('Basic', null, true);
+						model.selectionBuildStanceContinuous();
                         selected_enabled = 1;
                     }
                      buildFromQueue(ADVANCED_NAVAL_FAC);
@@ -370,6 +354,7 @@ var tAutoFactory = (function () {
                     if(selected_enabled === 0) {
                         api.select.allIdleFactories();
 						api.select.fromSelectionWithTypeFilter('Basic', null, true);
+						model.selectionBuildStanceContinuous();
                         selected_enabled = 1;
                     }
                      buildFromQueue(ORBITAL_FACTORY);
@@ -377,7 +362,8 @@ var tAutoFactory = (function () {
 				api.select.allIdleFactories();
                 if (t1_bot_use === 1) {
                     if(selected_enabled === 0) {
-                        api.select.allIdleFactories();
+						api.select.allIdleFactories();
+						model.selectionBuildStanceContinuous();
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
@@ -389,7 +375,8 @@ var tAutoFactory = (function () {
                 if (t1_veh_use === 1) {
 					
                     if(selected_enabled === 0) {
-                        api.select.allIdleFactories();
+						api.select.allIdleFactories();
+						model.selectionBuildStanceContinuous();
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
@@ -401,7 +388,8 @@ var tAutoFactory = (function () {
                 
                 if (t1_air_use === 1) {
                     if(selected_enabled === 0) {
-                        api.select.allIdleFactories();
+						api.select.allIdleFactories();
+						model.selectionBuildStanceContinuous();
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
@@ -411,7 +399,8 @@ var tAutoFactory = (function () {
                
                 if (t1_nav_use === 1) {
                     if(selected_enabled === 0) {
-                        api.select.allIdleFactories();
+						api.select.allIdleFactories();
+						model.selectionBuildStanceContinuous();
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
@@ -421,7 +410,8 @@ var tAutoFactory = (function () {
                
                 if (t1_orb_use === 1) {
                     if(selected_enabled === 0) {
-                        api.select.allIdleFactories();
+						api.select.allIdleFactories();
+						model.selectionBuildStanceContinuous();
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
@@ -431,6 +421,7 @@ var tAutoFactory = (function () {
 
               
                 if(selected_enabled === 1) {
+					
                     api.select.empty();
                 }
 
