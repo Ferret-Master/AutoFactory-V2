@@ -1,17 +1,21 @@
+var isGW = false;
+var gameType = undefined;
 
 var tAutoFactory = (function () {
     "use strict";
 	
 	//function to build using the queue list
 	function buildFromQueue(FACNAME){
+
+		if(gameType == "Galactic War"){isGW = true};
 		engine.call('set_order_state', 'build', 'continuous');
-		var i;
 		
-		for (i = 0; i < FACNAME.length; i=i+3) {
-			var amount = parseInt(FACNAME[i],10),  //parses custom setting amounts
-			type = (FACNAME[i+1]),
-			priority = FACNAME[i+2];
-			
+		for (var i = 0; i < FACNAME.length; i=i+3) {
+			var amount = parseInt(FACNAME[i],10)  //parses custom setting amounts
+			if(isGW == true){var type = (FACNAME[i+1]+".player")}
+			else{var type = (FACNAME[i+1])}
+			var priority = FACNAME[i+2];
+		
 			api.unit.build(type, amount, priority);
 
 		}
@@ -143,6 +147,7 @@ var tAutoFactory = (function () {
 		
 		function parseBuildQueue(Queue){
 			
+			
 			for (var b = 0;b<Queue.length;b++){
 				if (Queue.length%3 !== 0){
 					console.log("flagged " + Queue + " as for incorrect length");
@@ -198,7 +203,8 @@ var tAutoFactory = (function () {
 							
 							
 							
-							Queue[b] = Unit_List[i];
+							
+							Queue[b] = Unit_List[i]
 							validUnit = true; // if valid unit is found, tells program to not mark the queue as invalid
 							
 							}
@@ -290,16 +296,17 @@ var tAutoFactory = (function () {
     model.TimeSinceLanding = 0;
 
     tAutoFactory.update = function (exec_type) {
-
-
+		gameType == undefined
+		
+		if(gameType == undefined){gameType = model.gameType();}
         if (exec_type === undefined) {
             exec_type = 'auto';
         }
-
-        if ( ((exec_type === 'manual') && model.gameOver() == false|| ((exec_type === 'auto') && !model.hasSelection()))  && model.maxEnergy() > 0 && model.gameOver() == false) {
 		
+        if ( ((exec_type === 'manual') && model.gameOver() == false|| ((exec_type === 'auto') && !model.hasSelection()))  && model.maxEnergy() > 0 && model.gameOver() == false) {
+			
 		if(model.TimeSinceLanding<landTime && model.TimeSinceLanding !== 0){landTime = model.TimeSinceLanding}
-			//console.log("Time since landing = "+model.TimeSinceLanding+" Start time set as : "+StartTime+" Land time is "+landTime)
+			
 			if((model.TimeSinceLanding > (landTime + StartTime)|| StartTime + 240 <model.TimeSinceLanding)&&(model.paused() === false)){
 
             //if user hasn't selected anything && we're playing
@@ -307,6 +314,7 @@ var tAutoFactory = (function () {
                var selected_enabled = 0;//if idle factories have been selected
 
             if (tAutoFactory.active) {
+				
                 //if we possibly want to auto-build
 				//all t2 facs queued before t1 so we can deselect advanced factories to prevent t1 units queued in them
 				
@@ -315,7 +323,7 @@ var tAutoFactory = (function () {
                         
                         api.select.allIdleFactories();
 						api.select.fromSelectionWithTypeFilter('Basic', null, true);
-					
+						
                         selected_enabled = 1;
                     }
 					
@@ -375,7 +383,7 @@ var tAutoFactory = (function () {
 					
                     if(selected_enabled === 0) {
 						api.select.allIdleFactories();
-					
+						
                         selected_enabled = 1;
                     }
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
@@ -456,7 +464,7 @@ var tAutoFactory = (function () {
 
     //update every 3 seconds
 	//change this if you want slightly more reliability, be careful though
-	setTimeout(tAutoFactory.update, 1000);
+	setTimeout(tAutoFactory.update, 5000);
 	//console.log("timeout set")
 
     //visible to knockout
