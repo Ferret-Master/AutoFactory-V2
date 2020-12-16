@@ -7,13 +7,8 @@ var tAutoFactory = (function () {
 	//function to build using the queue list
 	function buildFromQueue(FACNAME){
 
-
-
-		
-		
 		if(gameType == "Galactic War"){isGW = true};
 		engine.call('set_order_state', 'build', 'continuous');
-		
 		
 		for (var i = 0; i < FACNAME.length; i=i+3) {
 			var amount = parseInt(FACNAME[i],10)  //parses custom setting amounts
