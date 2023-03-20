@@ -9,7 +9,7 @@ var tAutoFactory = (function () {
 
 		if(gameType == "Galactic War"){isGW = true};
 		engine.call('set_order_state', 'build', 'continuous');
-		
+		if(Array.isArray(FACNAME)){
 		for (var i = 0; i < FACNAME.length; i=i+3) {
 			var amount = parseInt(FACNAME[i],10)  //parses custom setting amounts
 			if(isGW == true){var type = (FACNAME[i+1]+".player")}
@@ -18,7 +18,7 @@ var tAutoFactory = (function () {
 		
 			api.unit.build(type, amount, priority);
 
-		}
+		}}
 		
 	}
 
@@ -129,11 +129,15 @@ var tAutoFactory = (function () {
 		//grabs each setting and splits the string
 		for (var i = 0;i < numberOfFactorys;i++) {
 			SettingsList[i] = api.settings.isSet('Autofactory', FactoryList[i], true)==undefined?Default_List[i]:api.settings.isSet('Autofactory', FactoryList[i], true);
-			if(SettingsList[i].length < 6){
+			if(SettingsList[i].length == 0){
+				SettingsList[i] = SettingsList[i];
+			}
+			else if(SettingsList[i].length < 6 && SettingsList[i].length !== 0){
 				SettingsList[i] = Default_List[i];
 				
 			}
 			SettingsList[i] = SettingsList[i].split(',');
+			console.log(SettingsList[i])
 		
 			
 		}
@@ -148,7 +152,7 @@ var tAutoFactory = (function () {
 		
 		function parseBuildQueue(Queue){
 			
-			
+			if(Queue.length == 1 && Queue[0].length == 0){return -1}
 			for (var b = 0;b<Queue.length;b++){
 				if (Queue.length%3 !== 0){
 					console.log("flagged " + Queue + " as for incorrect length");
@@ -173,8 +177,6 @@ var tAutoFactory = (function () {
 						Queue[b] = false;
 						
 						}
-					
-					
 					
 					if ( b%3 === 0){ //checking that number being checked is in the right spot
 						
