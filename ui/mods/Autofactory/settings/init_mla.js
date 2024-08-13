@@ -23,7 +23,7 @@
   var SettingsList = ['Seconds Before Activation']
   var FactoryList = ['Bot_Factory','Advanced_Bot_Factory','Vehicle_Factory','Advanced_Vehicle_Factory','Air_Factory','Advanced_Air_Factory','Naval_Factory','Advanced_Naval_Factory','Orbital_Launcher','Orbital_Factory']
   var groups = []
-  var DefaultQueueList = ['5,DOX,F,2,SPARK,F','3,SLAMMER,F,1,BLUEHAWK,F,1,GILE,F','3,ANT,F,2,INFERNO,F,1,SPINNER,F,1,SKITTER,F,2,ANT,F','3,LEVELER,F,2,SHELLER,F,3,LEVELER,F,2,SHELLER,F,1,STORM,F','1,FIREFLY,T,2,HUMMINGBIRD,F,1,BUMBLEBEE,F,2,HUMMINGBIRD,F','2,PHOENIX,F,2,KESTREL,F,1,HORSEFLY,F','2,BARRACUDA,F,1,NARWHAL,F,1,ORCA,F','1,TYPHOON,T,2,KRAKEN,F,1,LEVIATHAN,F','1,AVENGER,F','10,AVENGER,F,2,ARTEMIS,F']
+  var DefaultQueueList = ['5,DOX,F,2,SPARK,F,1,STINGER,F','3,SLAMMER,F,1,BLUEHAWK,F,1,GILE,F','3,ANT,F,2,INFERNO,F,1,SPINNER,F,1,SKITTER,F,2,ANT,F','3,LEVELER,F,2,SHELLER,F,3,LEVELER,F,2,SHELLER,F,1,STORM,F','1,FIREFLY,T,2,HUMMINGBIRD,F,1,BUMBLEBEE,F,2,HUMMINGBIRD,F','2,PHOENIX,F,2,KESTREL,F,1,HORSEFLY,F','2,BARRACUDA,F,1,NARWHAL,F,1,ORCA,F','1,TYPHOON,T,2,KRAKEN,F,1,LEVIATHAN,F','1,AVENGER,F','10,AVENGER,F,2,ARTEMIS,F']
 
   for (var i = 0;i < numberOfFactorys;i=i+1) {
     api.settings.definitions.Autofactory.settings[FactoryList[i]] = {

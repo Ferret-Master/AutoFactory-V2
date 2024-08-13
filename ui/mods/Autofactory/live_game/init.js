@@ -61,6 +61,7 @@ var tAutoFactory = (function () {
 
 	//MLA ----------------------------------------------------------
     var	ANT = '/pa/units/land/tank_light_laser/tank_light_laser.json',
+		STINGER = '/pa/units/land/bot_aa/bot_aa.json',
 		VEHICLE_FAB = '/pa/units/land/fabrication_vehicle/fabrication_vehicle.json',
 		SKITTER = '/pa/units/land/land_scout/land_scout.json',
 		SPINNER = '/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json',
@@ -272,7 +273,7 @@ var tAutoFactory = (function () {
 		
 		//declaring default queue for each factory
 		
-		BOT_FAC = '5,DOX,F,2,SPARK,F',
+		BOT_FAC = '5,DOX,F,2,SPARK,F,1,STINGER,F',
 		ADVANCED_BOT_FAC = '3,SLAMMER,F,1,BLUEHAWK,F,1,GILE,F',
 		VEHICLE_FAC = '3,ANT,F,2,INFERNO,F,1,SPINNER,F,1,SKITTER,F,2,ANT,F',
 		ADVANCED_VEHICLE_FAC = '3,LEVELER,F,2,SHELLER,F,3,LEVELER,F,2,SHELLER,F,1,STORM,F',
