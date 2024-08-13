@@ -35,6 +35,8 @@ var tAutoFactory = (function () {
 
 		if(gameType == "Galactic War"){isGW = true};
 		engine.call('set_order_state', 'build', 'continuous');
+
+		if(Array.isArray(FACNAME)){
 		for (var i = 0; i < FACNAME.length; i=i+3) {
 			var amount = parseInt(FACNAME[i],10)  //parses custom setting amounts
 			if(isGW == true){var type = (FACNAME[i+1]+".player")}
@@ -56,6 +58,7 @@ var tAutoFactory = (function () {
 		}
 		
 	}
+}
 
 	// declaring all units/jsons as their commonly known name
 
