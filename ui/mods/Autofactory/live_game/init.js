@@ -49,7 +49,10 @@ var tAutoFactory = (function () {
 					if(bugResearchMap[type] !== undefined){type = bugResearchMap[type]}
 				}
 				else{
-					if(bugResearchMap[type] !== undefined){type = bugResearchMap[type]}
+					if(bugResearchMap[type] !== undefined && !_.includes(model.lockedUnits, bugResearchMap[type])){
+						
+						type = bugResearchMap[type]
+					}
 				}
 			}
 		
@@ -303,7 +306,7 @@ var tAutoFactory = (function () {
 		Basic_Hive = '3,GRUNT,F,3,NEEDLER,F,1,ZAPPER,F,1,BOMBARDIER,F',
 		Advanced_Hive = '3,SCORCHER,F,2,MANTICORE,F,1,TEMPEST,F,3,SCORCHER,F,2,MANTICORE,F',
 		Air_Hive = '4,BUG_FIGHTER,F,1,MEDUSA,F,4,BUG_FIGHTER,F',
-		Advanced_Air_Hive = '4,BUG_FIGHTER,F,1,MEDUSA,F,4,BUG_FIGHTER,F',
+		Advanced_Air_Hive =  '4,BUG_FIGHTER_ADVANCED,F,2,BASILISK,F',
 		Spire = '1,SEEKER,F',
 
 
