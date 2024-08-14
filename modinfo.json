@@ -2,18 +2,20 @@
    "context": "client",
    "identifier": "com.pa.ferretmaster.Autofactory",
    "display_name": "Autofactory V2",
-   "description": "Automatically builds units in your factorys, now with full queue support",
+   "description": "Automatically builds units in your factorys, now with full queue and faction support",
    "author": "Ferretmaster",
-   "version": "1.22",
-   "build": "116400",
-   "date": "2023-03-21",
+   "version": "1.24",
+   "build": "120799",
+   "date": "2024-08-14",
    "signature": "not yet implemented",
    "forum": "https://forums.planetaryannihilation.com/threads/rel-client-autofactory-v2.73481/",
    "priority": 100,
    "icon": "https://github.com/ferret-Master/AutoFactory-V2/blob/Release/AutoFactory.png?raw=true",
    "scenes": {
         "settings": [
-            "coui://ui/mods/Autofactory/settings/init.js"
+            "coui://ui/mods/Autofactory/settings/init_mla.js",
+             "coui://ui/mods/Autofactory/settings/init_legion.js",
+              "coui://ui/mods/Autofactory/settings/init_bugs.js"
         ],
         "live_game": [
             "coui://ui/mods/Autofactory/live_game/init.js"
