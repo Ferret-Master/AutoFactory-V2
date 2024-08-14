@@ -22,6 +22,18 @@
   var SettingsListTitle = ['Seconds Before Activation from landing']
   var LegionSettingsList = ['Seconds Before Activation']
   var LegionFactoryList = ['Walker_Foundry','Advanced_Walker_Foundry','Armour_Foundry','Advanced_Armour_Foundry','Flyer_Foundry','Advanced_Flyer_Foundry','Ship_Foundry','Advanced_Ship_Foundry','Starship_Projector','Starship_Foundry']
+  var LegionFactoryUnitsList = [
+    'Walker_Foundry:(L_BOT_FAB,PEACEKEEPER,PATRIOT,PURGER,INVESTIGATOR,LANCER)',
+    'Advanced_Walker_Foundry:(L_BOT_FAB_ADVANCED,ENFORCER,ORBWEAVER,MINIMAN,NECROMANCER,MONSTROSITY,PRAETORIAN)',
+    'Armour_Foundry:(L_VEHICLE_FAB,STOKE,SHANK,CORSAIR,MAUL,GUARDIAN)',
+    'Advanced_Armour_Foundry:(L_VEHICLE_FAB_ADVANCED,HAVOC,SCORPION,DEATHMARK,PANZER,EARTHSHAKER)',
+    'Flyer_Foundry:(L_AIR_FAB,SCYTHE,NOVA,DAUNTLESS,MARAUDER,OSPREY)',
+    'Advanced_Flyer_Foundry:(L_AIR_FAB_ADVANCED,FIREBIRD,LOCKHEED,SALAMANDER,METEOR,INFILTRATOR)',
+    'Ship_Foundry(L_NAVAL_FAB,CATFISH,TALOS,AKULA,BOWHEAD,REMORA)',
+    'Advanced_Ship_Foundry:(L_NAVAL_FAB_ADVANCED,JAEGER,MANTA,HAMMERHEAD,EPOCH)',
+    'Starship_Projector:(L_ORBITAL_FAB,CHARIOT,VIPER,SPECTRE,SPUTNIK)',
+    'Starship_Foundry:(KOSMOS,PALADIN,IMPERATOR,BLACK_KNIGHT)'
+  ]
   var groups = []
   var LegionDefaultQueueList = [
     '2,PEACEKEEPER,F,1,PATRIOT,F,3,LANCER,F,5,PEACEKEEPER,F,1,PATRIOT,F,3,LANCER,F,3,PEACEKEEPER,F,1,INVESTIGATOR,F',
@@ -37,7 +49,7 @@
 
   for (var i = 0;i < numberOfFactorys;i=i+1) {
     api.settings.definitions.AutofactoryLegion.settings[LegionFactoryList[i]] = {
-      title: (LegionFactoryList[i]),
+      title: (LegionFactoryUnitsList[i]),
       type: 'text',
       default: LegionDefaultQueueList[i]
     }

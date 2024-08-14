@@ -22,6 +22,14 @@ var numberOfSettings = 1
 var SettingsListTitle = ['Seconds Before Activation from landing']
 var BugsSettingsList = ['Seconds Before Activation']
 var BugsFactoryList = ['Swarm_Hive','Basic_Hive','Advanced_Hive','Air_Hive','Advanced_Air_Hive','Spire']
+var BugsFactoryUnitsList = [
+  'Swarm_Hive:(FORAGER,RIPPER,BELCHER,BOOMER,RUNNER)',
+  'Basic_Hive:(BUG_BOT_FAB,GRUNT,NEEDLER,ZAPPER,BOMBARDIER)',
+  'Advanced_Hive:(ADVANCED_BUG_BOT_FAB,SCORCHER,MANTICORE,ALPHA_BOOMER,TEMPEST,HYDRA,CRUSHER)',
+  'Air_Hive:(BUG_AIR_FAB,BUG_FIGHTER,MEDUSA,HARPY,BUG_TRANSPORT)',
+  'Advanced_Air_Hive:(BUG_AIR_FAB_ADVANCED,BUG_FIGHTER_ADVANCED,BASILISK,STHENO)',
+  'Spire:(BUG_ORBITAL_FAB,SEEKER,CHOMPER,BEHEMOTH,BUG_ORBITAL_LASER,BUG_ORBITAL_RADAR)'
+]
 var groups = []
 var BugsDefaultQueueList = [
   '5,RIPPER,F,2,BOOMER,F,1,RUNNER,F',
@@ -34,7 +42,7 @@ var BugsDefaultQueueList = [
 
 for (var i = 0;i < numberOfFactorys;i=i+1) {
   api.settings.definitions.AutofactoryBugs.settings[BugsFactoryList[i]] = {
-    title: (BugsFactoryList[i]),
+    title: (BugsFactoryUnitsList[i]),
     type: 'text',
     default: BugsDefaultQueueList[i]
   }
