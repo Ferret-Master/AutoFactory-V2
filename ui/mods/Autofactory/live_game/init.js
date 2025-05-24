@@ -65,6 +65,75 @@ var tAutoFactory = (function () {
 
 	// declaring all units/jsons as their commonly known name
 
+	//EXILES
+		var T_BOT_FAB = "/pa/units/land/t_bot_fab/t_bot_fab.json",
+		CAN = "/pa/units/land/can/can.json",
+		TAIPAN = "/pa/units/land/hunter/hunter.json",
+		LICE = "/pa/units/land/lice/lice.json",
+		TIN = "/pa/units/land/tin/tin.json",
+		HYENA = "/pa/units/land/hyena/hyena.json",
+		
+			
+		T_BOT_FAB_ADV = "/pa/units/land/t_bot_fab_adv/t_bot_fab_adv.json",
+		RHINO = "/pa/units/land/luddite/luddite.json",
+		TORCH = "/pa/units/land/torch/torch.json",
+		TARANTULA = "/pa/units/land/t_bot_aa/t_bot_aa.json",
+		CAPE = "/pa/units/land/gale/gale.json",
+
+		PUMPA = "/pa/units/commanders/ft_commander/ft_commander.json",
+		INFL = "/pa/units/land/jelly/jelly.json",
+		CYCLOPS = "/pa/units/land/tripod/tripod.json",
+
+
+
+		T_BATTLE_FAB = "/pa/units/exiles/battle_fab/battle_fab.json",
+		SWORD_DOX = "/pa/units/land/sword_dox/sword_dox.json",
+
+
+
+		T_TANK_FAB = "/pa/units/land/t_tank_fab/t_tank_fab.json",
+		WHEEL = "/pa/units/land/tank_wheel/tank_wheel.json",
+		BOLT = "/pa/units/land/lightning/lightning.json",
+		CROC = "/pa/units/land/roamer/roamer.json",
+		OCELOT = "/pa/units/land/t_tank_flak/t_tank_flak.json",
+		MEERCAT = "/pa/units/land/meerkat/meerkat.json",
+
+		T_TANK_FAB_ADV = "/pa/units/land/t_tank_fab_adv/t_tank_fab_adv.json",
+		STEALTH = "/pa/units/land/stalker/stalker.json",
+		HIPPO = "/pa/units/land/adv_tank_hover/adv_tank_hover.json",
+		COUGAR = "/pa/units/land/tank_gattling/tank_gattling.json",
+		HAIL = "/pa/units/land/hail/hail.json",
+		SHAH = "/pa/units/land/shah/shah.json",
+
+
+
+		T_AIR_FAB = "/pa/units/air/t_air_fab/t_air_fab.json",
+		KIKIMORA = "/pa/units/air/fighter_stealth/fighter_stealth.json",
+		DRAGONFLY = "/pa/units/air/scout/dragonfly.json",
+		STORK = "/pa/units/air/t_transport/t_transport.json",
+		REDKITE = "/pa/units/air/t_bomber/t_bomber.json",
+
+		T_AIR_FAB_ADV = "/pa/units/air/t_air_fab_adv/t_air_fab_adv.json",
+		NEEDLETAIL = "/pa/units/air/t_int/t_int.json",
+		SHRIKE = "/pa/units/air/swordfish/swordfish.json",
+		GARGOYLE = "/pa/units/air/ts_air_fab/t_air_fab.json",
+		VULTURE = "/pa/units/air/strat_bomber/strat_bomber.json",
+
+
+
+
+
+		T_NAVAL_FAB = "/pa/units/sea/t_naval_fab/t_naval_fab.json",
+		T_SKILFF = "/pa/units/sea/t_hover_skiff/t_hover_skiff.json",
+		T_FRIGATE = "/pa/units/sea/a_croc/a_croc.json",
+		T_MORTAR = "/pa/units/sea/a_mortar/a_mortar.json",
+		T_HARDTACK = "/pa/units/sea/hardtack/hardtack.json",
+
+		T_NAVAL_FAB_ADV = "/pa/units/sea/t_naval_fab_adv/t_naval_fab_adv.json",
+		T_SCILLA = "/pa/units/sea/scilla/scilla.json",
+		T_MORRAY = "/pa/units/sea/cruiser/cruiser.json",
+		T_ULUA = "/pa/units/sea/drone_aa/drone_aa.json"
+
 	//MLA ----------------------------------------------------------
     var	ANT = '/pa/units/land/tank_light_laser/tank_light_laser.json',
 		STINGER = '/pa/units/land/bot_aa/bot_aa.json',
@@ -256,14 +325,16 @@ var tAutoFactory = (function () {
 			RIPPER,RUNNER,SCORCHER,GRUNT_BIG,NEEDLER,NEEDLER_FAST,MANTICORE,BUG_SNIPER,GRUNT],
 		Legion_Unit_List = [NOVA, METEOR,INFILTRATOR,DAUNTLESS,L_AIR_FAB,L_AIR_FAB_ADVANCED,SCYTHE,FIREBIRD, SALAMANDER,LOCKHEED, MARAUDER, OSPREY,PEACEKEEPER,PATRIOT,ORBWEAVER,PURGER,MINIMAN,MONSTROSITY,PRAETORIAN,L_BOT_FAB,L_BOT_FAB_ADVANCED,L_VEHICLE_FAB,L_VEHICLE_FAB_ADVANCED,GUARDIAN,CORSAIR,PANZER,STOKE, NECROMANCER,ENFORCER,INVESTIGATOR,MAUL,LANCER,DEATHMARK,EARTHSHAKER,SCORPION,SHANK, HAVOC,IMPERATOR,L_ORB_FAB,VIPER,CHARIOT,BLACK_KNIGHT,SPECTRE,PALADIN,SPUTNIK,COSMOS,AKULA,EPOCH,BOWHEAD,L_NAVAL_FAB,L_NAVAL_FAB_ADVANCED,REMORA,TALOS,JAEGER,MANTA,CATFISH,HAMMERHEAD],
 		Unit_List = [ANT,STINGER,VEHICLE_FAB,SKITTER,SPINNER,INFERNO,GRENADIER,DOX,SLAMMER,GILE,BOT_FAB,STITCH,BLUEHAWK,COLONEL,LOCUST,BOOM,SPARK,HUMMINGBIRD,AIR_FAB,FIREFLY,BUMBLEBEE,NAVAL_FAB,PIRANHA,NARWHAL,ORCA,BARRACUDA,ICARUS,SOLAR_ARRAY,PELICAN,KESTREL,HORSEFLY,ANGEL,WYRM,HORNET,PHOENIX,KAIJU,KRAKEN,STINGRAY,LEVIATHAN,TYPHOON,STRYKER,DRIFTER,LEVELER,STORM,SHELLER,VANGUARD,MANHATTAN,ASTRAEUS,HERMES,AVENGER,ARTEMIS,SSX,OMEGA,ORBITAL_FAB,ADVANCED_BOT_FAB,ADVANCED_VEHICLE_FAB,ADVANCED_AIR_FAB,ADVANCED_NAVAL_FAB,BARNACLE,MEND,ARKYD,ADVANCED_RADAR_SATELLITE],
-		
-		Bug_String_List = ["BUG_TRANSPORT","BUG_ORBITAL_TRANSPORT","BEHEMOTH","CHOMPER","BUG_ORBITAL_FAB","SEEKER","SEEKER_VISION","BUG_ORBITAL_LASER","BUG_ORBITAL_RADAR","BUG_ORBITAL_RADAR_ADVANCED","BUG_FIGHTER","BUG_FIGHTER_ADVANCED","MEDUSA","STHENO",
+		Exiles_Unit_List = [T_BOT_FAB,CAN,TAIPAN,LICE,TIN,HYENA,T_BOT_FAB_ADV,RHINO,TORCH,TARANTULA,CAPE,PUMPA,INFL,CYCLOPS,T_BATTLE_FAB,SWORD_DOX,T_TANK_FAB,WHEEL,BOLT,CROC,OCELOT,MEERCAT,T_TANK_FAB_ADV,STEALTH,HIPPO,COUGAR,HAIL,SHAH,T_AIR_FAB,KIKIMORA,DRAGONFLY,STORK,REDKITE,T_AIR_FAB_ADV,NEEDLETAIL,SHRIKE,GARGOYLE,VULTURE,T_NAVAL_FAB,T_SKILFF,T_FRIGATE,T_MORTAR,T_HARDTACK,T_NAVAL_FAB_ADV,T_SCILLA,T_MORRAY,T_ULUA]
+		,Bug_String_List = ["BUG_TRANSPORT","BUG_ORBITAL_TRANSPORT","BEHEMOTH","CHOMPER","BUG_ORBITAL_FAB","SEEKER","SEEKER_VISION","BUG_ORBITAL_LASER","BUG_ORBITAL_RADAR","BUG_ORBITAL_RADAR_ADVANCED","BUG_FIGHTER","BUG_FIGHTER_ADVANCED","MEDUSA","STHENO",
 			"BUG_AIR_FAB","BUG_AIR_FAB_ADVANCED","HARPY","BASILISK","FORAGER","FORAGER_CHEAP","CRUSHER","HYDRA","BOMBARDIER","BUG_BOT_FAB","ZAPPER","TEMPEST","BUG_BOT_FAB_ADVANCED","BELCHER","BOOMER","BOOMER_R","ALPHA_BOOMER","STEALTH_RIPPER",
 			"RIPPER","RUNNER","SCORCHER","GRUNT_BIG","NEEDLER","NEEDLER_FAST","MANTICORE","BUG_SNIPER","GRUNT"
 		],
 		Legion_String_List = ["NOVA", "METEOR","INFILTRATOR","DAUNTLESS","L_AIR_FAB","L_AIR_FAB_ADVANCED","SCYTHE","FIREBIRD", "SALAMANDER","LOCKHEED", "MARAUDER", "OSPREY","PEACEKEEPER","PATRIOT","ORBWEAVER","PURGER","MINIMAN","MONSTROSITY","PRAETORIAN","L_BOT_FAB","L_BOT_FAB_ADVANCED","L_VEHICLE_FAB","L_VEHICLE_FAB_ADVANCED","GUARDIAN","CORSAIR","PANZER","STOKE", "NECROMANCER","ENFORCER","INVESTIGATOR","MAUL","LANCER","DEATHMARK","EARTHSHAKER","SCORPION","SHANK", "HAVOC","IMPERATOR","L_ORB_FAB","VIPER","CHARIOT","BLACK_KNIGHT","SPECTRE","PALADIN","SPUTNIK","COSMOS","AKULA","EPOCH","BOWHEAD","L_NAVAL_FAB","L_NAVAL_FAB_ADVANCED","REMORA","TALOS","JAEGER","MANTA","CATFISH","HAMMERHEAD"],
 		String_List = ["ANT","STINGER","VEHICLE_FAB","SKITTER","SPINNER","INFERNO","GRENADIER","DOX","SLAMMER","GILE","BOT_FAB","STITCH","BLUEHAWK","COLONEL","LOCUST","BOOM","SPARK","HUMMINGBIRD","AIR_FAB","FIREFLY","BUMBLEBEE","NAVAL_FAB","PIRANHA","NARWHAL","ORCA","BARRACUDA","ICARUS","SOLAR_ARRAY","PELICAN","KESTREL","HORSEFLY","ANGEL","WYRM","HORNET","PHOENIX","KAIJU","KRAKEN","STINGRAY","LEVIATHAN","TYPHOON","STRYKER","DRIFTER","LEVELER","STORM","SHELLER","VANGUARD","MANHATTAN","ASTRAEUS","HERMES","AVENGER","ARTEMIS","SSX","OMEGA","ORBITAL_FAB","ADVANCED_BOT_FAB","ADVANCED_VEHICLE_FAB","ADVANCED_AIR_FAB","ADVANCED_NAVAL_FAB","BARNACLE","MEND"],
-
+		Exiles_String_List = [
+			"T_BOT_FAB","CAN","TAIPAN","LICE","TIN","HYENA","T_BOT_FAB_ADV","RHINO","TORCH","TARANTULA","CAPE","PUMPA","INFL","CYCLOPS","T_BATTLE_FAB","SWORD_DOX","T_TANK_FAB","WHEEL","BOLT","CROC","OCELOT","MEERCAT","T_TANK_FAB_ADV","STEALTH","HIPPO","COUGAR","HAIL","SHAH","T_AIR_FAB","KIKIMORA","DRAGONFLY","STORK","REDKITE","T_AIR_FAB_ADV","NEEDLETAIL","SHRIKE","GARGOYLE","VULTURE","T_NAVAL_FAB","T_SKILFF","T_FRIGATE","T_MORTAR","T_HARDTACK","T_NAVAL_FAB_ADV","T_SCILLA","T_MORRAY","T_ULUA"
+		],
 		
 		// values that determine if a factory is auto queued , if you don't want a factory being auto queued set to 0
 		
@@ -312,11 +383,33 @@ var tAutoFactory = (function () {
 		Advanced_Air_Hive =  '4,BUG_FIGHTER_ADVANCED,F,2,BASILISK,F',
 		Spire = '1,SEEKER,F',
 
+		//exiles defaults
+
+		Bot_Factory = '6,CAN,F,2,TIN,F,1,LICE,F,1,TAIPAN,F',
+		Advanced_Bot_Factory = '5,RHINO,F,2,TORCH,F,1,TARANTULA,F,1,CAPE,F',
+
+		Foundry = '1,T_BATTLE_FAB,F,10,SWORD_DOX,F',
+
+		Tank_Factory = '5,WHEEL,F,2,BOLT,F,2,CROC,F,2,OCELOT,F,1,MEERCAT,F,5,WHEEL,F,2,BOLT,F',
+		Advanced_Tank_Factory = '2,HIPPO,F,2,COUGAR,F,1,HAIL,F',
+
+		Air_Factory = '3,KIKIMORA,F,1,DRAGONFLY,F,1,REDKITE,F,3,KIKIMORA,F,,F,1,REDKITE,F',
+		Advanced_Air_Factory = '3,NEEDLETAIL,F,1,SHRIKE,F,2,GARGOYLE,F',
+
+		Naval_Factory = '2,T_FRIGATE,F,1,T_MORTAR,F,1,T_HARDTACK,F',
+		Advanced_Naval_Factory = '5,T_SCILLA,F,2,T_MORRAY,F,1,T_ULUA,F',
+
+
+		Orbital_Launcher = '',
+		Advanced_Orbital_Factory = '',
+
 
 
 		Legion_Default_List = [Walker_Foundry ,Advanced_Walker_Foundry ,Armour_Foundry ,Advanced_Armour_Foundry ,Flyer_Foundry ,Advanced_Flyer_Foundry ,Ship_Foundry ,Advanced_Ship_Foundry ,Starship_Projector ,Starship_Foundry],
 
 		Bugs_Default_List = [Swarm_Hive,Basic_Hive,Advanced_Hive,Air_Hive,Advanced_Air_Hive,Spire],
+
+		Exiles_Default_List = [Bot_Factory,Advanced_Bot_Factory,Foundry,Tank_Factory,Advanced_Tank_Factory,Air_Factory,Advanced_Air_Factory,Naval_Factory,Advanced_Naval_Factory,Orbital_Launcher,Advanced_Orbital_Factory],
 		
 		Default_List = [BOT_FAC,ADVANCED_BOT_FAC,VEHICLE_FAC,ADVANCED_VEHICLE_FAC,AIR_FAC,ADVANCED_AIR_FAC,NAVAL_FAC,ADVANCED_NAVAL_FAC,ORBITAL_LAUNCHER,ORBITAL_FACTORY], //default list of factorys for use with settings
 		
@@ -331,7 +424,11 @@ var tAutoFactory = (function () {
 
 		BugsSettingsList = [],
 		BugsSettingsNameList = ['Seconds Before Activation'],
-		BugsFactoryList = ['Swarm_Hive','Basic_Hive','Advanced_Hive','Air_Hive','Advanced_Air_Hive','Spire']
+		BugsFactoryList = ['Swarm_Hive','Basic_Hive','Advanced_Hive','Air_Hive','Advanced_Air_Hive','Spire'],
+
+		ExilesSettingsList = [],
+		ExilesSettingsNameList = ['Seconds Before Activation'],
+		ExilesFactoryList = ["Bot_Factory","Advanced_Bot_Factory","Foundry","Tank_Factory","Advanced_Tank_Factory","Air_Factory","Advanced_Air_Factory","Naval_Factory","Advanced_Naval_Factory","Orbital_Launcher","Advanced_Orbital_Factory"]
 		//grabs each setting and splits the string
 		//MLA
 		for (var i = 0;i < numberOfFactorys;i++) {
@@ -389,14 +486,31 @@ var tAutoFactory = (function () {
 	
 		if(!(BugsStartTime > 10)){BugsStartTime = 0;}
 
+		//BUGS
+		for (var i = 0;i < ExilesFactoryList.length;i++) {
+			ExilesSettingsList[i] = api.settings.isSet('AutofactoryExiles', ExilesFactoryList[i], true)==undefined?Exiles_Default_List[i]:api.settings.isSet('AutofactoryExiles', ExilesFactoryList[i], true);
+			if(ExilesSettingsList[i].length < 6){
+				ExilesSettingsList[i] = Exiles_Default_List[i];
+				
+			}
+			ExilesSettingsList[i] = ExilesSettingsList[i].split(',');
 		
-		function parseBuildQueue(Queue, isLegion, isBugs){
+			
+		}
+		var ExilesStartTime = api.settings.isSet('AutofactoryExiles', ExilesSettingsNameList[0], true)==undefined?"0":api.settings.isSet('AutofactoryExiles', ExilesSettingsNameList[0], true);
+	
+		ExilesStartTime = parseInt(ExilesStartTime,10);
+	
+		if(!(ExilesStartTime > 10)){ExilesStartTime = 0;}
+		
+		function parseBuildQueue(Queue, isLegion, isBugs, isExiles){
 			
 
 			var localStringList = String_List
 			var Local_Unit_List = Unit_List
 			if(isLegion){localStringList = Legion_String_List;Local_Unit_List = Legion_Unit_List}
 			if(isBugs){localStringList = Bug_String_List; Local_Unit_List = Bug_Unit_List}
+			if(isExiles){localStringList = Exiles_String_List; Local_Unit_List = Exiles_Unit_List}
 			
 
 			if(Queue.length == 1 && Queue[0].length == 0){return -1}
@@ -493,6 +607,10 @@ var tAutoFactory = (function () {
 			BugsSettingsList[a] = parseBuildQueue(BugsSettingsList[a], false, true)
 			
 		}
+		for (var a = 0; a<ExilesSettingsList.length;a++) {
+			ExilesSettingsList[a] = parseBuildQueue(ExilesSettingsList[a], false, true)
+			
+		}
 		//parses Default queues in case they are needed
 		
 		
@@ -516,6 +634,10 @@ var tAutoFactory = (function () {
 		for(var i = 0;i<Bugs_Default_List.length;i++){
 			Bugs_Default_List[i] = Bugs_Default_List[i].split(',')
 		}
+		//Exiles default parse
+		for(var i = 0;i<Exiles_Default_List.length;i++){
+			Exiles_Default_List[i] = Exiles_Default_List[i].split(',')
+		}
 		//declaring the custom settings 
 		
 		var BOT_FAC_CUSTOM,ADVANCED_BOT_FAC_CUSTOM,VEHICLE_FAC_CUSTOM,ADVANCED_VEHICLE_FAC_CUSTOM,AIR_FAC_CUSTOM,ADVANCED_AIR_FAC_CUSTOM,NAVAL_FAC_CUSTOM,ADVANCED_NAVAL_FAC_CUSTOM,ORBITAL_LAUNCHER_CUSTOM,ORBITAL_FACTORY_CUSTOM;
@@ -523,12 +645,14 @@ var tAutoFactory = (function () {
 		var Walker_Foundry_Custom ,Advanced_Walker_Foundry_Custom ,Armour_Foundry_Custom ,Advanced_Armour_Foundry_Custom ,Flyer_Foundry_Custom ,Advanced_Flyer_Foundry_Custom ,Ship_Foundry_Custom ,Advanced_Ship_Foundry_Custom ,Starship_Projector_Custom ,Starship_Foundry_Custom;
 
 		var Swarm_Hive_Custom,Basic_Hive_Custom,Advanced_Hive_Custom,Air_Hive_Custom,Advanced_Air_Hive_Custom,Spire_Custom;
+
+		var Bot_Factory_Custom,Advanced_Bot_Factory_Custom,Foundry_Custom,Tank_Factory_Custom,Advanced_Tank_Factory_Custom,Air_Factory_Custom,Advanced_Air_Factory_Custom,Naval_Factory_Custom,Advanced_Naval_Factory_Custom,Orbital_Launcher_Custom,Advanced_Orbital_Factory_Custom
 		
 		//list of custom settings
 		var Custom_List = [BOT_FAC_CUSTOM,ADVANCED_BOT_FAC_CUSTOM,VEHICLE_FAC_CUSTOM,ADVANCED_VEHICLE_FAC_CUSTOM,AIR_FAC_CUSTOM,ADVANCED_AIR_FAC_CUSTOM,NAVAL_FAC_CUSTOM,ADVANCED_NAVAL_FAC_CUSTOM,ORBITAL_LAUNCHER_CUSTOM,ORBITAL_FACTORY_CUSTOM];
 		var Legion_Custom_List = [Walker_Foundry_Custom ,Advanced_Walker_Foundry_Custom ,Armour_Foundry_Custom ,Advanced_Armour_Foundry_Custom ,Flyer_Foundry_Custom ,Advanced_Flyer_Foundry_Custom ,Ship_Foundry_Custom ,Advanced_Ship_Foundry_Custom ,Starship_Projector_Custom ,Starship_Foundry_Custom]
 		var Bugs_Custom_List = [Swarm_Hive_Custom,Basic_Hive_Custom,Advanced_Hive_Custom,Air_Hive_Custom,Advanced_Air_Hive_Custom,Spire_Custom]
-		
+		var Exiles_Custom_List = [Bot_Factory_Custom,Advanced_Bot_Factory_Custom,Foundry_Custom,Tank_Factory_Custom,Advanced_Tank_Factory_Custom,Air_Factory_Custom,Advanced_Air_Factory_Custom,Naval_Factory_Custom,Advanced_Naval_Factory_Custom,Orbital_Launcher_Custom,Advanced_Orbital_Factory_Custom]
 		for(i=0;i<numberOfFactorys;i++){
 			Custom_List[i] = SettingsList[i];
 		}
@@ -540,7 +664,11 @@ var tAutoFactory = (function () {
 		for(i=0;i<Bugs_Custom_List.length;i++){
 			Bugs_Custom_List[i] = BugsSettingsList[i];
 		}
-	
+		
+		for(i=0;i<Exiles_Custom_List.length;i++){
+			Exiles_Custom_List[i] = ExilesSettingsList[i];
+		}
+
         tAutoFactory = {};
         tAutoFactory.active = true;
 
@@ -579,10 +707,23 @@ var tAutoFactory = (function () {
 		if(Bugs_Custom_List[3] !== false){Air_Hive = Bugs_Custom_List[3];}
 		if(Bugs_Custom_List[4] !== false){Advanced_Air_Hive = Bugs_Custom_List[4];}
 		if(Bugs_Custom_List[5] !== false){Spire = Bugs_Custom_List[5];}
+
+		//exiles
+		if(Exiles_Custom_List[0] !== false){Bot_Factory = Exiles_Custom_List[0];}
+		if(Exiles_Custom_List[1] !== false){Advanced_Bot_Factory = Exiles_Custom_List[1];}
+		if(Exiles_Custom_List[2] !== false){Foundry = Exiles_Custom_List[2];}
+		if(Exiles_Custom_List[3] !== false){Tank_Factory = Exiles_Custom_List[3];}
+		if(Exiles_Custom_List[4] !== false){Advanced_Tank_Factory = Exiles_Custom_List[4];}
+		if(Exiles_Custom_List[5] !== false){Air_Factory = Exiles_Custom_List[5];}
+		if(Exiles_Custom_List[6] !== false){Advanced_Air_Factory = Exiles_Custom_List[6];}
+		if(Exiles_Custom_List[7] !== false){Naval_Factory = Exiles_Custom_List[7];}
+		if(Exiles_Custom_List[8] !== false){Advanced_Naval_Factory = Exiles_Custom_List[8];}
+		if(Exiles_Custom_List[9] !== false){Orbital_Launcher = Exiles_Custom_List[9];}
+		if(Exiles_Custom_List[10] !== false){Advanced_Orbital_Factory = Exiles_Custom_List[10];}
 		
 	}
 	
-    console.log(Bugs_Custom_List)
+
 
     function threshold_parse(id) {
       return ( (api.settings.isSet('ui', id, true) == undefined?80:api.settings.isSet('ui', id, true)) * 0.01 );
@@ -628,6 +769,8 @@ var tAutoFactory = (function () {
 					buildFromQueue(Advanced_Hive);
                     buildFromQueue(ADVANCED_BOT_FAC);
 					buildFromQueue(Advanced_Walker_Foundry);
+					buildFromQueue(Advanced_Bot_Factory);
+					buildFromQueue(Foundry);
                 }
                 if (t2_veh_use === 1) {
                     if(selected_enabled === 0) {
@@ -638,6 +781,7 @@ var tAutoFactory = (function () {
                     }
                      buildFromQueue(ADVANCED_VEHICLE_FAC);
 					 buildFromQueue(Advanced_Armour_Foundry);
+					 buildFromQueue(Advanced_Tank_Factory);
                 }
                 if (t2_air_use === 1) {
                     if(selected_enabled === 0) {
@@ -649,6 +793,7 @@ var tAutoFactory = (function () {
 					 buildFromQueue(Advanced_Air_Hive);
                      buildFromQueue(ADVANCED_AIR_FAC);
 					 buildFromQueue(Advanced_Flyer_Foundry);
+					 buildFromQueue(Advanced_Air_Factory);
                 }
                 if (t2_nav_use === 1) {
                     if(selected_enabled === 0) {
@@ -659,6 +804,7 @@ var tAutoFactory = (function () {
                     }
                      buildFromQueue(ADVANCED_NAVAL_FAC);
 					 buildFromQueue(Advanced_Ship_Foundry);
+					 buildFromQueue(Advanced_Naval_Factory);
                 }
                 if (t2_orb_use === 1) {
                     if(selected_enabled === 0) {
@@ -669,6 +815,7 @@ var tAutoFactory = (function () {
                     }
                      buildFromQueue(ORBITAL_FACTORY);
 					 buildFromQueue(Starship_Foundry);
+					 buildFromQueue(Advanced_Orbital_Factory);
 				
                 }
 				api.select.allIdleFactories();
@@ -683,6 +830,7 @@ var tAutoFactory = (function () {
 					buildFromQueue(Swarm_Hive);
                     buildFromQueue(BOT_FAC);
 					buildFromQueue(Walker_Foundry);
+					buildFromQueue(Bot_Factory);
                 }
 
               
@@ -698,7 +846,7 @@ var tAutoFactory = (function () {
 					buildFromQueue(Basic_Hive);
                      buildFromQueue(VEHICLE_FAC);
 					 buildFromQueue(Armour_Foundry);
-					
+					buildFromQueue(Tank_Factory);
                 }
 
                 
@@ -712,6 +860,7 @@ var tAutoFactory = (function () {
 					 buildFromQueue(Air_Hive);
                      buildFromQueue(AIR_FAC);
 					 buildFromQueue(Flyer_Foundry);
+					 buildFromQueue(Air_Factory);
                 }
 
                
@@ -724,6 +873,7 @@ var tAutoFactory = (function () {
                     api.select.fromSelectionWithTypeFilter('Advanced', null, true);
                      buildFromQueue(NAVAL_FAC);
 					 buildFromQueue(Ship_Foundry);
+					 buildFromQueue(Naval_Factory);
                 }
 
                
@@ -737,6 +887,7 @@ var tAutoFactory = (function () {
 					
 					buildFromQueue(Spire);
                     buildFromQueue(ORBITAL_LAUNCHER);
+					buildFromQueue(Orbital_Launcher);
 					buildFromQueue(Starship_Projector);
                 }
 
