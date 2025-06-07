@@ -28,6 +28,7 @@ var tAutoFactory = (function () {
 	
 	//function to build using the queue list
 	function buildFromQueue(FACNAME){
+
 		var researchSwap = false
 		if(model.lockedUnits !== undefined){//research enabled
 			researchSwap = true
@@ -393,7 +394,7 @@ var tAutoFactory = (function () {
 		Tank_Factory = '5,WHEEL,F,2,BOLT,F,2,CROC,F,2,OCELOT,F,1,MEERCAT,F,5,WHEEL,F,2,BOLT,F',
 		Advanced_Tank_Factory = '2,HIPPO,F,2,COUGAR,F,1,HAIL,F',
 
-		Air_Factory = '3,KIKIMORA,F,1,DRAGONFLY,F,1,REDKITE,F,3,KIKIMORA,F,,F,1,REDKITE,F',
+		Air_Factory = '3,KIKIMORA,F,1,DRAGONFLY,F,1,REDKITE,F,3,KIKIMORA,F,1,REDKITE,F',
 		Advanced_Air_Factory = '3,NEEDLETAIL,F,1,SHRIKE,F,2,GARGOYLE,F',
 
 		Naval_Factory = '2,T_FRIGATE,F,1,T_MORTAR,F,1,T_HARDTACK,F',
@@ -608,7 +609,7 @@ var tAutoFactory = (function () {
 			
 		}
 		for (var a = 0; a<ExilesSettingsList.length;a++) {
-			ExilesSettingsList[a] = parseBuildQueue(ExilesSettingsList[a], false, true)
+			ExilesSettingsList[a] = parseBuildQueue(ExilesSettingsList[a], false,false, true)
 			
 		}
 		//parses Default queues in case they are needed
